@@ -1,0 +1,118 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-weight: 300;
+    padding: 0;
+}
+
+.nav-bar-button {
+    right: 10%;
+    top: 45px;
+    z-index: 6;
+}
+
+.imagewrapper {
+    position: static;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.85);
+    width: 100%;
+    height: 100%;
+}
+
+.cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(../images/asdf.jpg) no-repeat center center fixed;
+    background-size: 100% 100%;
+}
+
+.fixed {
+    position: fixed;
+    z-index: 5;
+}
+
+.fullwidth {
+    width: 100%;
+}
+
+.textanimation img {
+    height: 210px;
+    width: 230px;
+    z-index: 1;
+}
+
+.textanimation {
+    width: 100%;
+    z-index: 3;
+    font-weight: 200;
+    font-size: 40px;
+    color: #fff;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+footer {
+    color: #fff;
+    font-size: 15px;
+    min-height: 40px;
+    position: relative;
+    margin-bottom: 0;
+}
+footer img {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+}
+
+.synergy-workshops,
+.synergy-events,
+.synergy-sponsors {
+        font-size: 20px;
+    margin: 25px;
+    border-radius: 5px;
+    border: 1px solid #4caf50;
+}
+
+.synergy-events {
+    height: auto;
+}
+section .header {
+    font-size: 40px;
+}
+.circles {
+    padding: 40px;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+.circles li {
+    float:left;
+    margin: 15px;
+}
+.events-circles {
+    height: 90px;
+    width: 90px;
+    border-radius: 45px;
+    box-shadow: 0 0 10px #000;
+/*    border : 1px solid #000;*/
+}
+section div {
+    /*border: 1px solid #000;*/
+}
+section div .go-down{
+    height: 30px;
+    width: 30px;
+}
+.synergy-workshops-list div {
+    line-height: 40px;
+    font-size: 20px;
+}
+.synergy-workshops-info{
+    margin-top: 20px;
+    border: 1px solid #4caf50;
+    border-radius: 5px;
+    margin-left: 40px;
+}
