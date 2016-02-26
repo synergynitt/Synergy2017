@@ -29,6 +29,40 @@ $(".synergy-project-info").css({
     });
 }());
 
- $(document).ready(function(){
-    $('.scrollspy').scrollSpy();
-  });
+$("#workshops").on('click',function() {
+    $('html, body').animate({
+        'scrollTop' : $("#synergy-workshops").position().top
+    });
+});
+
+$("#goto-workshops").on('click',function() {
+    $('html, body').animate({
+        'scrollTop' : $("#synergy-workshops").position().top
+    });
+});
+$("#events").on('click',function() {
+    $('html, body').animate({
+        'scrollTop' : $("#synergy-events").position().top
+    });
+});
+$("#goto-events").on('click',function() {
+    $('html, body').animate({
+        'scrollTop' : $("#synergy-events").position().top
+    });
+});
+$("#registration").on('click',function() {
+    $('html, body').animate({
+        'scrollTop' : $("#synergy-reg").position().top
+    });
+});
+$("#goto-registration").on('click',function() {
+    $('html, body').animate({
+        'scrollTop' : $("#synergy-reg").position().top
+    });
+});
+
+$("#sponsors").on('click',function() {
+    $('html, body').animate({
+        'scrollTop' : $("#synergy-sponsors").position().top
+    });
+});
