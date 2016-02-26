@@ -79,6 +79,9 @@ footer img {
 section .header {
     font-size: 40px;
 }
+section .sub-header {
+    font-size: 25px;
+}
 .events {
     max-width: 1050px;
     margin-left: auto;
