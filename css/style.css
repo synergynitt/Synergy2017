@@ -118,3 +118,6 @@ section div {
     border-radius: 5px;
     margin-left: 40px;
 }
+.right-border{
+  border-right: 1px solid #4caf50;
+}
