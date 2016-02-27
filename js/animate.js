@@ -1,3 +1,16 @@
+(function(){
+  $("section, footer,a").hide();
+})();
+(function(){
+  $(".loading-screen").show();
+})();
+
+$(document).ready(function(){
+  $("section, footer,a").show();
+  $(".loading-screen").hide();
+});
+
+
 function timedText(text, id, callback) {
         var i = 0;
         (function animate() {

@@ -1,3 +1,5 @@
+var loggedin=0;
+
 (function hideusercontent(){
   $("#synergy-user-content").hide();
 })();
