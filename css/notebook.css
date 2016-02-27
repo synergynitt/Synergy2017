@@ -15,8 +15,10 @@
 	font-size:13px;
 	text-align:center;
 	padding:10px;
+	color: #fff;
 }
 .book-hide{
+	color: #fff;
 	position:absolute;
 	top:10px;
 	right:10px;
@@ -55,4 +57,33 @@
 }
 .flipbook .p1{
 	background: #fff;
+}
+.flipbook .rules{
+	/*margin:15px;*/
+	font-size: 15px;
+}
+.flipbook .heading{
+	color:#2e7d32;
+}
+.flipbook .sub-heading{
+	color:#2e7d32;
+	font-size: 20px;
+}
+.flipbook p {
+	font-size: 20px;
+	/*border: 1px solid #000;*/
+}
+.flipbook ul{
+	list-style: none;
+}
+.flipbook ul li {
+	margin-left: 30px;
+	margin-right: 20px;
+}
+.flipbook ol li  {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+.flipbook .contacts{
+	font-size: 20px;
 }
