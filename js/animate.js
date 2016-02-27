@@ -8,6 +8,7 @@
 $(document).ready(function(){
   $("section, footer,a").show();
   $(".loading-screen").hide();
+  $("#synergy-user-content").hide();
 });
 
 
