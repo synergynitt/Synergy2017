@@ -52,7 +52,6 @@ function checkPassword(){
 (function processRegistration(){
   $("#registration-submit").on("click", function(e){
     e.preventDefault();
-    console.log("Registration Button Clicked");
     var name=$("#first_name").val()+ " " +$("#last_name").val();
     var college=$("#college").val();
     var email=$("#email").val();
@@ -66,11 +65,14 @@ function checkPassword(){
            email:email,
            password:password
          };
-         console.log(data);
       $.post("register.php",data)
         .done(function(data){
-          console.log(data);
-          //Add Code Here
+            var response=JSON.parse(data);
+            console.log(response);
+            if (response.status==="success"){
+              loggedin=1;
+              loadUserContent();
+            }
         });
     }
   });
@@ -80,7 +82,6 @@ function checkPassword(){
 (function processLogin(){
   $("#login-submit").on("click", function(e){
     e.preventDefault();
-    console.log("Login Button Clicked");
     var email=$("#login-email").val();
     var password=$("#login-password").val();
     var isEmailValid=$("#login-email").hasClass("valid");
@@ -91,9 +92,37 @@ function checkPassword(){
          };
       $.post("login.php",data)
         .done(function(data){
-          console.log(data);
-          //Add Code Here
+          var response=JSON.parse(data);
+          console.log(response);
+          if (response.status==="success"){
+            loggedin=1;
+            loadUserContent();
+          }
         });
       };
   });
 })();
+
+(function processlogout(){
+  $("#logout").on("click", function(e){
+    e.preventDefault();
+    $.post("logout.php",data)
+      .done(function(data){
+          var response=JSON.parse(data);
+          console.log(response);
+          if (response.status==="logout"){
+            logout();
+          }
+      });
+  });
+})();
+
+function loadUserContent(){
+  $("#synergy-reg").hide();
+  $("#synergy-user-content").show();
+}
+function logout(){
+  loggedin=0;
+  $("#synergy-reg").show();
+  $("#synergy-user-content").hide();
+}

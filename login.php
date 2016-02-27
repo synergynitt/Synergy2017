@@ -12,9 +12,9 @@ $sql = <<<SQL
 SQL;
 
 if (!$result = $db->query($sql)){
-  $message = array ("status"=>"fail","description"=>"You couldn't be logged in, Try Again", "error"=>$db->error);
-  echo json_encode($message);
-  die();
+    $message = array ("status"=>"fail","description"=>"You couldn't be logged in, Try Again", "error"=>$db->error);
+    echo json_encode($message);
+    die();
 }
 
 if ($result->num_rows == 0){
