@@ -37,7 +37,6 @@ SQL;
     die();
   }
   while ($row=$result->fetch_assoc()){
-    echo "row found after inserting";
     $userid=$row['userid'];
     $name=$row['name'];
     $college=$row['college'];
@@ -49,14 +48,13 @@ SQL;
     $_SESSION['college']=$college;
     $_SESSION['email']=$email;
 
-    $message = array ("status"=>"sucsess","description"=>"User registered. Logged In");
+    $message = array ("status"=>"success","description"=>"User registered. Logged In");
     echo json_encode($message);
   }
 }
 
 
 while ($row=$result->fetch_assoc()){
-  echo "row found";
   $password_indb=$row['password'];
 
   if ($password_indb == $password){
@@ -71,7 +69,7 @@ while ($row=$result->fetch_assoc()){
     $_SESSION['college']=$college;
     $_SESSION['email']=$email;
 
-    $message = array ("status" =>"sucsess" , "description"=>"User already registered. Logged In");
+    $message = array ("status" =>"success" , "description"=>"User already registered. Logged In");
     echo json_encode($message);
   }else {
     $message = array ("status"=>"fail" , "description"=>"User already registered. Wrong Email Password Combination ");
