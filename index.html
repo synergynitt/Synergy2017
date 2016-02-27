@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/slider.css">
+	<link rel="stylesheet" href="css/notebook.css" type="text/css" />
 </head>
 
 <body>
@@ -19,6 +20,23 @@
           <div class="indeterminate"></div>
         </div>
       </div>
+  </section>
+
+  <section id="book-viewport" class="book-viewport">
+    <div class="instructions" > Use mouse on page corner or arrow keys to turn pages. Esc to close.</div>
+    <span id="book-hide" class="book-hide">Close </span>
+    <div class="container">
+      <div id="book" class="flipbook">
+        <div><p>Page 1 </p> </div>
+        <div><p>Page 2 </p> </div>
+        <div><p>Page 3 </p> </div>
+        <div><p>Page 4 </p> </div>
+        <div><p>Page 5 </p> </div>
+        <div><p>Page 6 </p> </div>
+        <div><p>Page 7 </p> </div>
+        <div><p>Page 8 </p> </div>
+      </div>
+    </div>
   </section>
 
   <a class="btn-floating btn-large waves-effect waves-light red fixed nav-bar-button" id="nav-bar-button">
@@ -71,7 +89,7 @@
     <div class="valign center center-align fullwidth">
       <span class="header">Events </span>
       <ul class="events">
-        <li class="events-li hoverable">
+        <li class="events-li hoverable" id="book-show">
           <a class="" data-position="bottom" data-delay="50" >
             <img class="events" src="images/asdf.jpg">
             Fix em up<br />
@@ -261,5 +279,7 @@
     <script src="js/animate.js" type="text/javascript"></script>
     <script src="js/slider.js" type="text/javascript"></script>
     <script src="js/user-content.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/lib/turn.min.js"></script>
+    <script type="text/javascript" src="js/notebook.js"></script>
 
     </html>
