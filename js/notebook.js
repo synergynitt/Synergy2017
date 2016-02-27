@@ -13,7 +13,7 @@ var loadBook = function(book){
 	$(bookid + "-show").on("click", function(){
 
 		$(bookid + "-viewport").show(300);
-		$("body").css({"overflow":"hidden"});
+		// $("body").css({"overflow":"hidden"});
 
 		$(document).on("keydown",function(e){
 			switch(e.which){
