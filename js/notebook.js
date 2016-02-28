@@ -58,6 +58,6 @@ $(document).ready(function(){
 	loadBook("sanrachana");
 	loadBook("paperplane");
 	loadBook("selfpropellingvehicle");
-	loadBook("carmodelling");
-	loadBook("mcquiz");
+	// loadBook("carmodelling");
+	// loadBook("mcquiz");
 });

@@ -117,6 +117,7 @@ function checkPassword(){
 })();
 
 function loadUserContent(){
+  $(".reg-result").empty();
   $("#synergy-reg").hide();
   $("#synergy-user-content").show();
   // Add here
