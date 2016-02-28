@@ -118,7 +118,6 @@ function checkPassword(){
 })();
 
 function loadUserContent(){
-  $("#registeredEvents").empty();
   $("#synergy-reg").hide();
   $("#synergy-user-content").show();
   var url="getusercontent.php";
@@ -126,13 +125,14 @@ function loadUserContent(){
   .done(function(data){
     var response=JSON.parse(data);
     if (response.status=="success"){
+      $("#registeredEvents").empty();
       var registeredEvents=response.registeredEvents;
       var registeredEventsCode=response.registeredEventsCode;
       var i;
       for (i=0;i<registeredEvents.length;i++){
         var id="deregister_"+registeredEventsCode[i];
 
-        var tag = '<tr><td>' + registeredEvents[i] + '</td><td><div class="chip right" id="'+id+'"">Unregister    <i class="material-icons">close</i></div></td></tr>';
+        var tag = '<tr><td>' + registeredEvents[i] + '</td><td><div class="chip right green deregister" id="'+id+'"">Unregister    <i class="material-icons">close</i></div></td></tr>';
         console.log(tag);
         $("#registeredEvents").append(tag);
 
