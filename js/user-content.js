@@ -1,6 +1,6 @@
 var loggedin=0;
 
-(function hideusercontent(){
+(function hideUserContent(){
   $("#synergy-user-content").hide();
 })();
 
@@ -48,7 +48,6 @@ function checkPassword(){
   });
 })();
 
-
 (function processRegistration(){
   $("#registration-submit").on("click", function(e){
     e.preventDefault();
@@ -78,7 +77,6 @@ function checkPassword(){
   });
 })();
 
-
 (function processLogin(){
   $("#login-submit").on("click", function(e){
     e.preventDefault();
@@ -103,10 +101,11 @@ function checkPassword(){
   });
 })();
 
-(function processlogout(){
+(function processLogout(){
   $("#logout").on("click", function(e){
+    console.log("logout");
     e.preventDefault();
-    $.post("logout.php",data)
+    $.post("logout.php")
       .done(function(data){
           var response=JSON.parse(data);
           console.log(response);
@@ -120,9 +119,84 @@ function checkPassword(){
 function loadUserContent(){
   $("#synergy-reg").hide();
   $("#synergy-user-content").show();
+  // Add here
 }
+
 function logout(){
   loggedin=0;
   $("#synergy-reg").show();
   $("#synergy-user-content").hide();
+  $(".reg-result").empty();
 }
+
+function registerevent(event){
+  console.log(event);
+  if (loggedin === 1){
+    var url="eventreg.php?event=" + event;
+    console.log('asdf');
+    console.log(url);
+    $.get(url)
+    .done(function(data){
+      var response=JSON.parse(data);
+      console.log(response);
+      if (response.status==="success"){
+        $("#"+event+" .reg-result").html(response.description);
+      }else if (response.status==="fail"){
+        $("#"+event+" .reg-result").html(response.description);
+      }else if (response.status==="logout"){
+        $("#"+event+" .reg-result").html(response.description);
+        logout();
+      }
+    });
+  }else{
+      $("#"+event+" .reg-result").html("You need to login to register");
+  }
+}
+
+(function eventRegistrations(){
+    $("#fixemup-register").on("click",function(e){
+      registerevent("fixemup");
+    });
+    $("#engineerofthefuture-register").on("click",function(e){
+      e.preventDefault();
+      registerevent("engineerofthefuture");
+    });
+    $("#techyhunt-register").on("click",function(e){
+      e.preventDefault();
+      registerevent("techyhunt");
+    });
+    $("#junkyardwars-register").on("click",function(e){
+      e.preventDefault();
+      registerevent("junkyardwars");
+    });
+    $("#paperpresentation-register").on("click",function(e){
+      e.preventDefault();
+      registerevent("paperpresentation");
+    });
+    $("#waterrocketry-register").on("click",function(e){
+      e.preventDefault();
+      registerevent("waterrocketry");
+    });
+    $("#sanrachana-register").on("click",function(e){
+      e.preventDefault();
+      registerevent("sanrachana");
+    });
+    $("#paperplane-register").on("click",function(e){
+      e.preventDefault();
+      registerevent("paperplane");
+    });
+    $("#selfpropellingvehicle-register").on("click",function(e){
+      e.preventDefault();
+      registerevent("selfpropellingvehicle");
+    });
+    $("#carmodelling-register").on("click",function(e){
+      e.preventDefault();
+      registerevent("carmodelling");
+    });
+    $("#mcquiz-register").on("click",function(e){
+      e.preventDefault();
+      registerevent("mcquiz");
+    });
+
+
+})();
