@@ -190,9 +190,9 @@ function registerevent(event){
       e.preventDefault();
       registerevent("selfpropellingvehicle");
     });
-    $("#carmodelling-register").on("click",function(e){
+    $("#cadmodelling-register").on("click",function(e){
       e.preventDefault();
-      registerevent("carmodelling");
+      registerevent("cadmodelling");
     });
     $("#mcquiz-register").on("click",function(e){
       e.preventDefault();
