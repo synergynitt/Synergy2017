@@ -94,6 +94,7 @@ function checkPassword(){
           console.log(response);
           if (response.status==="success"){
             loggedin=1;
+            $(".reg-result").empty();
             loadUserContent();
           }
         });
@@ -117,10 +118,36 @@ function checkPassword(){
 })();
 
 function loadUserContent(){
-  $(".reg-result").empty();
+  $("#registeredEvents").empty();
   $("#synergy-reg").hide();
   $("#synergy-user-content").show();
-  // Add here
+  var url="getusercontent.php";
+  $.get(url)
+  .done(function(data){
+    var response=JSON.parse(data);
+    if (response.status=="success"){
+      var registeredEvents=response.registeredEvents;
+      var registeredEventsCode=response.registeredEventsCode;
+      var i;
+      for (i=0;i<registeredEvents.length;i++){
+        var id="deregister_"+registeredEventsCode[i];
+
+        var tag = '<tr><td>' + registeredEvents[i] + '</td><td><div class="chip right" id="'+id+'"">Unregister    <i class="material-icons">close</i></div></td></tr>';
+        console.log(tag);
+        $("#registeredEvents").append(tag);
+
+        $("#"+id).on("click", (function(eventcode){
+          return function(){
+            deregisterevent(eventcode);
+          }
+        })(registeredEventsCode[i]) );
+
+      }
+    }else {
+      logout();
+    }
+
+  });
 }
 
 function logout(){
@@ -142,6 +169,7 @@ function registerevent(event){
       console.log(response);
       if (response.status==="success"){
         $("#"+event+" .reg-result").html(response.description);
+        loadUserContent();
       }else if (response.status==="fail"){
         $("#"+event+" .reg-result").html(response.description);
       }else if (response.status==="logout"){
@@ -151,6 +179,17 @@ function registerevent(event){
     });
   }else{
       $("#"+event+" .reg-result").html("You need to login to register");
+  }
+}
+
+function deregisterevent(eventcode){
+  console.log(eventcode);
+  if (loggedin === 1){
+    var url="eventreg.php?event=" + eventcode + "&deregister=1";
+    $.get(url);
+    loadUserContent();
+  }else{
+    logout();
   }
 }
 
@@ -198,6 +237,4 @@ function registerevent(event){
       e.preventDefault();
       registerevent("mcquiz");
     });
-
-
 })();

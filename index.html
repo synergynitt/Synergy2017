@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/slider.css">
   <link rel="stylesheet" href="css/notebook.css" type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -689,7 +690,9 @@
               <label for="confirm-password" data-error="Didn't Match">Confirm Password</label>
             </div>
           </div>
-          <button class="btn waves-effect waves-light green darken-3" type="submit" name="action" id="registration-submit">Register<i class="material-icons right"></i></button>
+          <button class="btn waves-effect waves-light green darken-3" type="submit" name="action" id="registration-submit">Register
+          <i class="material-icons right">send</i>
+        </button>
         </form>
       </div>
     </div>
@@ -711,7 +714,9 @@
               <label for="login-password">Password</label>
             </div>
           </div>
-          <button class="btn waves-effect waves-light green darken-3" type="submit" name="action" id="login-submit">Login<i class="material-icons right"></i></button>
+          <button class="btn waves-effect waves-light green darken-3" type="submit" name="action" id="login-submit">Login
+            <i class="material-icons right">send</i>
+          </button>
         </form>
       </div>
     </div>
@@ -722,16 +727,23 @@
   <section id="synergy-user-content" class="synergy-workshops section  valign-wrapper" >
     <div class="row fullwidth valign center center-align">
       <div class="col s12">
-        <span class="header">Your Registrations</span>
+        <span class="header fullwidth">Your Registrations<br><br></span>
       </div>
-      <div class="col s6">
+      <div class="col s6 right-border">
         <span class="sub-header"> Events </span><br />
+          <table class="striped highlight">
+            <tbody id="registeredEvents">
+            </tbody>
+
+          </table>
+          <br>
       </div>
       <div class="col s6">
         <span class="sub-header"> Workshops </span><br />
       </div>
-      <div>
-        <button class="btn waves-effect waves-light green darken-3" type="submit" name="action" id="logout">Log Out<i class="material-icons right"></i></button>
+      <div class="col s12">
+        <button class="btn waves-effect waves-light green darken-3" type="submit" name="action" id="logout">Log Out
+          <i class="material-icons right">send</i>
       </div>
     </div>
   </section>
