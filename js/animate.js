@@ -74,7 +74,11 @@ $("#goto-registration").on('click',function() {
         'scrollTop' : $("#synergy-reg").position().top
     });
 });
-
+$("#guestlectures").on('click',function() {
+    $('html, body').animate({
+        'scrollTop' : $("#synergy-gl").position().top
+    });
+});
 $("#sponsors").on('click',function() {
     $('html, body').animate({
         'scrollTop' : $("#synergy-sponsors").position().top
