@@ -124,11 +124,7 @@ section div {
 .right-border{
   border-right: 1px solid #2e7d32;
 }
-.Prize{
-  color:#2e7d32 ;
-  font-size:15px;
-  font-weight: 500;
-}
+
 .deregister{
   color:#ffffff    ;
 }
