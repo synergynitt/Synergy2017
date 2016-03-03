@@ -106,10 +106,7 @@ section div {
     /*border: 1px solid #000;*/
 }
 .go-down{
-  position: relative;
-    height: 30px;
-    width: 30px;
-    bottom: 0px;
+    cursor:pointer;
 }
 .synergy-workshops-list div {
     line-height: 40px;
@@ -130,4 +127,7 @@ section div {
 }
 .gl{
   margin:20px;
+}
+.registration{
+  cursor:pointer;
 }
