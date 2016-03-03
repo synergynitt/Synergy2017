@@ -37,7 +37,7 @@ $(".synergy-project-info").css({
 
 (function textanimation() {
     timedText("SYNERGY 2016", "#textanimdata", function(){
-        timedText("SYMPOSIUM OF MECHANICAL ENGINEERING DEPARTMENT , NIT TRICHY".toUpperCase(), "#textanimdata", function(){
+        timedText("MECHANICAL ENGINEERING SYMPOSIUM, NIT TRICHY".toUpperCase(), "#textanimdata", function(){
           timedText ("APRIL 14-16","#textanimdata",textanimation)
         });
     });
