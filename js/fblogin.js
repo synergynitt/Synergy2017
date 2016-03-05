@@ -1,19 +1,8 @@
 function statusChangeCallback(response) {
-  console.log('statusChangeCallback');
-  console.log(response);
   if (response.status === 'connected') {
-
-    testAPI();
-
-  } else if (response.status === 'not_authorized') {
-    document.getElementById('status').innerHTML = 'Please log ' +
-      'into this app.';
-  } else {
-    document.getElementById('status').innerHTML = 'Please log ' +
-      'into Facebook.';
+    callAPI();
   }
 }
-
 function checkLoginState() {
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
@@ -42,11 +31,24 @@ FB.getLoginStatus(function(response) {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function testAPI() {
-  console.log('Welcome!  Fetching your information.... ');
-  FB.api('/me', function(response) {
-    console.log('Successful login for: ' + response.name);
-    document.getElementById('status').innerHTML =
-      'Thanks for logging in, ' + response.name + '!';
+function callAPI() {
+  FB.api('/me?fields=name,email', function(response) {
+    var name= response.name;
+    var email=response.email;
+    var fbid=response.id;
+    var data={
+         name:name,
+         email:email,
+         fbid:fbid
+       };
+    $.post("register.php",data)
+      .done(function(data){
+          var response=JSON.parse(data);
+          if (response.status==="success"){
+            loggedin=1;
+            fblogin=1;
+            loadUserContent();
+          }
+      });
   });
 }

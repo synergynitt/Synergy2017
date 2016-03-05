@@ -1,4 +1,5 @@
 var loggedin=0;
+var fblogin=0;
 
 (function hideUserContent(){
   $("#synergy-user-content").hide();
@@ -64,8 +65,10 @@ function checkPassword(){
            email:email,
            password:password
          };
+      console.log(data);
       $.post("register.php",data)
         .done(function(data){
+          console.log(data);
             var response=JSON.parse(data);
             console.log(response);
             if (response.status==="success"){
@@ -104,16 +107,28 @@ function checkPassword(){
 
 (function processLogout(){
   $("#logout").on("click", function(e){
-    console.log("logout");
     e.preventDefault();
-    $.post("logout.php")
-      .done(function(data){
-          var response=JSON.parse(data);
-          console.log(response);
-          if (response.status==="logout"){
-            logout();
-          }
+    if (fblogin==1){
+      FB.logout(function(response) {
+        $.post("logout.php")
+          .done(function(data){
+              var response=JSON.parse(data);
+              console.log(response);
+              if (response.status==="logout"){
+                logout();
+              }
+          });
       });
+    }else{
+      $.post("logout.php")
+        .done(function(data){
+            var response=JSON.parse(data);
+            console.log(response);
+            if (response.status==="logout"){
+              logout();
+            }
+        });
+    }
   });
 })();
 
