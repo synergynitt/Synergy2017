@@ -282,7 +282,7 @@ $("#campus-ambassador-reg-hide").on('click', function(){
     var phone=$("#CA_phone").val();
     var password=$("#CA_password").val();
     var confirmPassword=$("#CA_confirm_password").val();
-    if (confirmPassword!=password){
+    if (confirmPassword!=password || password===""){
       $("#CA_confirm_password").removeClass("valid");
       $("#CA_confirm_password").addClass("invalid");
       $("#CA_password").removeClass("valid");
