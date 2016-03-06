@@ -277,6 +277,7 @@ $("#campus-ambassador-reg-hide").on('click', function(){
     var name=$("#CA_first_name").val()+ " " +$("#CA_last_name").val();
     var college=$("#CA_college").val();
     var email=$("#CA_email").val();
+    var phone=$("#CA_phone").val();
     var password=$("#CA_password").val();
     var confirmPassword=$("#CA_confirm_password").val();
     if (confirmPassword!=password){
@@ -288,6 +289,7 @@ $("#campus-ambassador-reg-hide").on('click', function(){
          name:name,
          college:college,
          email:email,
+         phone:phone,
          password:password
        };
     $.post("caregister.php",data)
