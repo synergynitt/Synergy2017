@@ -1,16 +1,16 @@
-(function(){
+(function hideAllContents(){
   $("section, footer,a").hide();
 })();
-(function(){
+(function showLoadingScreen(){
   $(".loading-screen").show();
 })();
 
-$(document).ready(function(){
+$(document).ready(function showAllContents(){
   $("section, footer,a").show();
   $(".loading-screen").hide();
   $("#synergy-user-content").hide();
+  // $("#campus-ambassador-reg").hide();
 });
-
 
 function timedText(text, id, callback) {
         var i = 0;
@@ -24,17 +24,18 @@ function timedText(text, id, callback) {
             }
         }());
 }
- $("#textanimation").css({
-     "height": window.innerHeight
- });
-$("section").css({
-     "min-height": window.innerHeight
- });
-
-$(".synergy-project-info").css({
-    "min-height" : window.innerHeight - 200
+$("#textanimation").css({
+   "height": window.innerHeight
 });
-
+$("section").css({
+  "min-height": window.innerHeight
+});
+$("#campus-ambassador-reg").css({
+  "min-height": window.innerHeight
+});
+$("#campus-ambassador-reg .contain").css({
+  "min-width": window.innerWidth
+});
 (function textanimation() {
     timedText("SYNERGY 2016", "#textanimdata", function(){
         timedText("MECHANICAL ENGINEERING SYMPOSIUM, NIT TRICHY".toUpperCase(), "#textanimdata", function(){
@@ -48,7 +49,6 @@ $("#workshops").on('click',function() {
         'scrollTop' : $("#synergy-workshops").position().top
     });
 });
-
 $("#goto-workshops").on('click',function() {
     $('html, body').animate({
         'scrollTop' : $("#synergy-workshops").position().top

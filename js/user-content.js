@@ -99,6 +99,10 @@ function checkPassword(){
             loggedin=1;
             $(".reg-result").empty();
             loadUserContent();
+          }else {
+            loggedin=0;
+            $(".reg-result").empty();
+            $(".reg-result").html(response.description);
           }
         });
       };
@@ -252,4 +256,50 @@ function deregisterevent(eventcode){
       e.preventDefault();
       registerevent("mcquiz");
     });
+})();
+
+$("#campus-ambassador").on('click',function(e){
+  e.preventDefault();
+  $('html, body').animate({
+      'scrollTop' : $("#campus-ambassador-reg").position().top
+  });
+  $("#campus-ambassador-reg").show();
+
+});
+$("#campus-ambassador-reg-hide").on('click', function(){
+  console.log("hide");
+  $("#campus-ambassador-reg").hide();
+});
+
+(function processCARegistration(){
+  $("#CA-registration-submit").on("click", function(e){
+    e.preventDefault();
+    var name=$("#CA_first_name").val()+ " " +$("#CA_last_name").val();
+    var college=$("#CA_college").val();
+    var email=$("#CA_email").val();
+    var password=$("#CA_password").val();
+    var confirmPassword=$("#CA_confirm_password").val();
+    if (confirmPassword!=password){
+      $("#CA_confirm_password").removeClass("valid");
+      $("#CA_confirm_password").addClass("invalid");
+      return;
+    }
+    var data={
+         name:name,
+         college:college,
+         email:email,
+         password:password
+       };
+    $.post("caregister.php",data)
+      .done(function(data){
+          var response=JSON.parse(data);
+          if (response.status==="success"){
+            $(".ca-status").empty();
+            $(".ca-status").html(response.description);
+          }else{
+            $(".ca-status").empty();
+            $(".ca-status").html(response.description);
+          }
+      });
+  });
 })();
