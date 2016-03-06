@@ -9,7 +9,7 @@ $(document).ready(function showAllContents(){
   $("section, footer,a").show();
   $(".loading-screen").hide();
   $("#synergy-user-content").hide();
-  // $("#campus-ambassador-reg").hide();
+  $("#campus-ambassador-reg").hide();
 });
 
 function timedText(text, id, callback) {
