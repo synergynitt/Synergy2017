@@ -60,10 +60,10 @@ function checkPassword(){
     var isEmailValid=$("#email").hasClass("valid");
     if (isPasswordValid && isEmailValid){
       var data={
-           name:name,
-           college:college,
-           email:email,
-           password:password
+           "name":name,
+           "college":college,
+           "email":email,
+           "password":password
          };
       console.log(data);
       $.post("register.php",data)
@@ -88,8 +88,8 @@ function checkPassword(){
     var isEmailValid=$("#login-email").hasClass("valid");
     if (isEmailValid){
       var data={
-           email:email,
-           password:password
+           "email":email,
+           "password":password
          };
       $.post("login.php",data)
         .done(function(data){
@@ -274,9 +274,11 @@ $("#campus-ambassador-reg-hide").on('click', function(){
 (function processCARegistration(){
   $("#CA-registration-submit").on("click", function(e){
     e.preventDefault();
+    $(".ca-status").empty();
     var name=$("#CA_first_name").val()+ " " +$("#CA_last_name").val();
     var college=$("#CA_college").val();
     var email=$("#CA_email").val();
+    var fbname=$("#CA_fbname").val();
     var phone=$("#CA_phone").val();
     var password=$("#CA_password").val();
     var confirmPassword=$("#CA_confirm_password").val();
@@ -286,12 +288,14 @@ $("#campus-ambassador-reg-hide").on('click', function(){
       return;
     }
     var data={
-         name:name,
-         college:college,
-         email:email,
-         phone:phone,
-         password:password
+         "name":name,
+         "college":college,
+         "email":email,
+         "fbname":fbname,
+         "phone":phone,
+         "password":password
        };
+    console.log(data);
     $.post("caregister.php",data)
       .done(function(data){
           var response=JSON.parse(data);
@@ -301,6 +305,7 @@ $("#campus-ambassador-reg-hide").on('click', function(){
           }else{
             $(".ca-status").empty();
             $(".ca-status").html(response.description);
+            window.alert(response.description)
           }
       });
   });
