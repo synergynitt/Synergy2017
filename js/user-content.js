@@ -285,7 +285,14 @@ $("#campus-ambassador-reg-hide").on('click', function(){
     if (confirmPassword!=password){
       $("#CA_confirm_password").removeClass("valid");
       $("#CA_confirm_password").addClass("invalid");
+      $("#CA_password").removeClass("valid");
+      $("#CA_password").addClass("invalid");
       return;
+    }else{
+      $("#CA_confirm_password").removeClass("invalid");
+      $("#CA_confirm_password").addClass("valid");
+      $("#CA_password").removeClass("invalid");
+      $("#CA_password").addClass("valid");
     }
     var data={
          "name":name,
@@ -301,11 +308,14 @@ $("#campus-ambassador-reg-hide").on('click', function(){
           var response=JSON.parse(data);
           if (response.status==="success"){
             $(".ca-status").empty();
+            $(".ca-status").addClass("success");
+            $(".ca-status").removeClass("error");
             $(".ca-status").html(response.description);
-          }else{
+          }else if (response.status==="fail"){
             $(".ca-status").empty();
+            $(".ca-status").removeClass("success");
+            $(".ca-status").addClass("error");
             $(".ca-status").html(response.description);
-            window.alert(response.description)
           }
       });
   });

@@ -153,5 +153,10 @@ section div {
 .ca-status{
   font-size: 20px;
   font-weight: 400;
+}
+.success{
   color:#2e7d32;
+}
+.error{
+  color:#ef5350;
 }
