@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2016 at 06:02 AM
+-- Generation Time: Mar 08, 2016 at 06:14 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.15
 
@@ -19,6 +19,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `synergy`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ambassadors`
+--
+
+CREATE TABLE `ambassadors` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `college` varchar(45) NOT NULL,
+  `fbname` varchar(45) DEFAULT NULL,
+  `email` varchar(45) NOT NULL,
+  `phone` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ambassadors`
+--
+
+INSERT INTO `ambassadors` (`id`, `name`, `college`, `fbname`, `email`, `phone`, `password`) VALUES
+(1, 'asdf asdf', 'asdfasdf', 'asdf', 'asdf', 'asdfa', 'asdfasdf'),
+(2, 'asdf asdf', 'asdfasdf', 'asdf', 'asdf@asdf', 'asdfa', 'asdfasdf');
 
 -- --------------------------------------------------------
 
@@ -81,6 +105,12 @@ INSERT INTO `users` (`userid`, `name`, `college`, `email`, `password`, `fbid`) V
 --
 
 --
+-- Indexes for table `ambassadors`
+--
+ALTER TABLE `ambassadors`
+  ADD PRIMARY KEY (`id`,`email`);
+
+--
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
@@ -98,6 +128,11 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `ambassadors`
+--
+ALTER TABLE `ambassadors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --
