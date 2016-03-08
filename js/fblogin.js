@@ -9,18 +9,17 @@ function checkLoginState() {
   });
 }
 
-window.fbAsyncInit = function() {
-FB.init({
-  appId      : '899354956847787',
-  cookie     : true,
-  xfbml      : true,
-  version    : 'v2.5'
-});
+window.fbAsyncInit = function(){
+  FB.init({
+    appId      : '899354956847787',
+    cookie     : true,
+    xfbml      : true,
+    version    : 'v2.5'
+  });
 
-FB.getLoginStatus(function(response) {
-  statusChangeCallback(response);
-});
-
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
 };
 
 (function(d, s, id) {
@@ -36,18 +35,41 @@ function callAPI() {
     var name= response.name;
     var email=response.email;
     var fbid=response.id;
-    var data={
+    var fbdata={
          name:name,
          email:email,
          fbid:fbid
        };
-    $.post("register.php",data)
+    $.post("register.php",fbdata)
       .done(function(data){
           var response=JSON.parse(data);
           if (response.status==="success"){
-            loggedin=1;
-            fblogin=1;
-            loadUserContent();
+            if (response.description=="Get College Details"){
+              var college;
+              var rollno;
+              while(college== null){
+                college=prompt("Enter Your College");
+              }
+              var rollno=prompt("Enter Your Rollno");
+              while(rollno==null){
+                rollno=prompt("Enter Your Rollno");
+              }
+              fbdata.college=college;
+              fbdata.rollno=rollno;
+              $.post("register.php",fbdata)
+                .done(function(data){
+                  var response=JSON.parse(data);
+                  if (response.status==="success"){
+                    loggedin=1;
+                    fblogin=1;
+                    loadUserContent();
+                  }
+                });
+            }else{
+              loggedin=1;
+              fblogin=1;
+              loadUserContent();
+            }
           }
       });
   });

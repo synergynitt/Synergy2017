@@ -37,13 +37,13 @@ function checkPassword(){
     return valid;
 }
 
-(function confirmationPasswordFieldChange(){
+(function onConfirmationPasswordFieldChange(){
   $("#confirm-password").on("change",function(){
   checkConfirmationPassword();
   });
 })();
 
-(function passwordFieldChange(){
+(function onPasswordFieldChange(){
   $("#password").on("change",function(){
     checkPassword();
   });
@@ -157,7 +157,7 @@ function loadUserContent(){
 
         $("#"+id).on("click", (function(eventcode){
           return function(){
-            deregisterevent(eventcode);
+            deregisterEvent(eventcode);
           }
         })(registeredEventsCode[i]) );
 
@@ -176,7 +176,7 @@ function logout(){
   $(".reg-result").empty();
 }
 
-function registerevent(event){
+function registerEvent(event){
   console.log(event);
   if (loggedin === 1){
     var url="eventreg.php?event=" + event;
@@ -201,7 +201,7 @@ function registerevent(event){
   }
 }
 
-function deregisterevent(eventcode){
+function deregisterEvent(eventcode){
   console.log(eventcode);
   if (loggedin === 1){
     var url="eventreg.php?event=" + eventcode + "&deregister=1";
@@ -214,47 +214,47 @@ function deregisterevent(eventcode){
 
 (function eventRegistrations(){
     $("#fixemup-register").on("click",function(e){
-      registerevent("fixemup");
+      registerEvent("fixemup");
     });
     $("#engineerofthefuture-register").on("click",function(e){
       e.preventDefault();
-      registerevent("engineerofthefuture");
+      registerEvent("engineerofthefuture");
     });
     $("#techyhunt-register").on("click",function(e){
       e.preventDefault();
-      registerevent("techyhunt");
+      registerEvent("techyhunt");
     });
     $("#junkyardwars-register").on("click",function(e){
       e.preventDefault();
-      registerevent("junkyardwars");
+      registerEvent("junkyardwars");
     });
     $("#paperpresentation-register").on("click",function(e){
       e.preventDefault();
-      registerevent("paperpresentation");
+      registerEvent("paperpresentation");
     });
     $("#waterrocketry-register").on("click",function(e){
       e.preventDefault();
-      registerevent("waterrocketry");
+      registerEvent("waterrocketry");
     });
     $("#sanrachana-register").on("click",function(e){
       e.preventDefault();
-      registerevent("sanrachana");
+      registerEvent("sanrachana");
     });
     $("#paperplane-register").on("click",function(e){
       e.preventDefault();
-      registerevent("paperplane");
+      registerEvent("paperplane");
     });
     $("#selfpropellingvehicle-register").on("click",function(e){
       e.preventDefault();
-      registerevent("selfpropellingvehicle");
+      registerEvent("selfpropellingvehicle");
     });
     $("#cadmodelling-register").on("click",function(e){
       e.preventDefault();
-      registerevent("cadmodelling");
+      registerEvent("cadmodelling");
     });
     $("#mcquiz-register").on("click",function(e){
       e.preventDefault();
-      registerevent("mcquiz");
+      registerEvent("mcquiz");
     });
 })();
 

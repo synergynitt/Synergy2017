@@ -53,7 +53,6 @@ if ($result->num_rows == 0){
 }else{
   $message=array("status"=>"success","description"=>"You have registered before. We will get in touch with you soon.");
   echo json_encode($message);
-  
 }
 
 ?>
