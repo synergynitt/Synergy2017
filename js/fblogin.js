@@ -40,37 +40,41 @@ function callAPI() {
          email:email,
          fbid:fbid
        };
+      //  console.log(fbdata);
     $.post("register.php",fbdata)
       .done(function(data){
-          var response=JSON.parse(data);
-          if (response.status==="success"){
-            if (response.description=="Get College Details"){
-              var college;
-              var rollno;
-              while(college== null){
-                college=prompt("Enter Your College");
-              }
-              var rollno=prompt("Enter Your Rollno");
-              while(rollno==null){
-                rollno=prompt("Enter Your Rollno");
-              }
-              fbdata.college=college;
-              fbdata.rollno=rollno;
-              $.post("register.php",fbdata)
-                .done(function(data){
-                  var response=JSON.parse(data);
-                  if (response.status==="success"){
-                    loggedin=1;
-                    fblogin=1;
-                    loadUserContent();
-                  }
-                });
-            }else{
-              loggedin=1;
-              fblogin=1;
-              loadUserContent();
+        // console.log(data);
+        var response=JSON.parse(data);
+        if (response.status==="success"){
+          if (response.description==="Get College Details"){
+            var college;
+            var rollno;
+            while(college== null){
+              college=prompt("Enter Your College");
             }
+            var rollno=prompt("Enter Your Rollno");
+            while(rollno==null){
+              rollno=prompt("Enter Your Rollno");
+            }
+            fbdata.college=college;
+            fbdata.rollno=rollno;
+            // console.log(fbdata);
+            $.post("register.php",fbdata)
+              .done(function(data){
+                // console.log(data);
+                var response=JSON.parse(data);
+                if (response.status==="success"){
+                  loggedin=1;
+                  fblogin=1;
+                  loadUserContent();
+                }
+              });
+          }else{
+            loggedin=1;
+            fblogin=1;
+            loadUserContent();
           }
+        }
       });
   });
 }
