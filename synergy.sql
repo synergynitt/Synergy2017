@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2016 at 06:14 AM
+-- Generation Time: Mar 10, 2016 at 04:12 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.15
 
@@ -36,14 +36,6 @@ CREATE TABLE `ambassadors` (
   `password` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `ambassadors`
---
-
-INSERT INTO `ambassadors` (`id`, `name`, `college`, `fbname`, `email`, `phone`, `password`) VALUES
-(1, 'asdf asdf', 'asdfasdf', 'asdf', 'asdf', 'asdfa', 'asdfasdf'),
-(2, 'asdf asdf', 'asdfasdf', 'asdf', 'asdf@asdf', 'asdfa', 'asdfasdf');
-
 -- --------------------------------------------------------
 
 --
@@ -51,7 +43,7 @@ INSERT INTO `ambassadors` (`id`, `name`, `college`, `fbname`, `email`, `phone`, 
 --
 
 CREATE TABLE `events` (
-  `userid` int(11) NOT NULL,
+  `groupid` int(11) NOT NULL,
   `fixemup` int(11) NOT NULL DEFAULT '0',
   `engineerofthefuture` int(11) NOT NULL DEFAULT '0',
   `techyhunt` int(11) NOT NULL DEFAULT '0',
@@ -69,9 +61,47 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`userid`, `fixemup`, `engineerofthefuture`, `techyhunt`, `junkyardwars`, `paperpresentation`, `waterrocketry`, `sanrachana`, `paperplane`, `selfpropellingvehicle`, `cadmodelling`, `mcquiz`) VALUES
-(9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `events` (`groupid`, `fixemup`, `engineerofthefuture`, `techyhunt`, `junkyardwars`, `paperpresentation`, `waterrocketry`, `sanrachana`, `paperplane`, `selfpropellingvehicle`, `cadmodelling`, `mcquiz`) VALUES
+(3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `groups`
+--
+
+CREATE TABLE `groups` (
+  `groupid` int(11) NOT NULL,
+  `groupname` varchar(45) NOT NULL,
+  `members` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` (`groupid`, `groupname`, `members`) VALUES
+(1, 'Rizwan Hakkim', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usergroup`
+--
+
+CREATE TABLE `usergroup` (
+  `id` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `groupid` int(11) NOT NULL,
+  `groupname` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `usergroup`
+--
+
+INSERT INTO `usergroup` (`id`, `userid`, `groupid`, `groupname`) VALUES
+(1, 1, 1, 'Rizwan Hakkim');
 
 -- --------------------------------------------------------
 
@@ -82,6 +112,7 @@ INSERT INTO `events` (`userid`, `fixemup`, `engineerofthefuture`, `techyhunt`, `
 CREATE TABLE `users` (
   `userid` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
+  `rollno` varchar(45) DEFAULT NULL,
   `college` varchar(45) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
   `password` varchar(45) DEFAULT NULL,
@@ -92,13 +123,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userid`, `name`, `college`, `email`, `password`, `fbid`) VALUES
-(9, 'Rizwan Hakkim', 'NITT', '111113070@nitt.edu', 'asdfasdf', NULL),
-(10, 'Ajish Philip', 'NIT Trichy', 'ajish.philip@outlook.com', 'ajishajish', NULL),
-(11, 'a a', 'a', 'a@a', 'asdfasdf', NULL),
-(12, 'Rizwan Hakkim', '', 'rizwan.hkm@gmail.com', '', '965490480195194'),
-(13, 'sd asd', 'asdfasd', 'cv@asdf', 'asdfasdf', NULL),
-(14, 'asdf asdf', 'asdfasdf', 'zxcv@asdfasdf', 'asdfasdf', NULL);
+INSERT INTO `users` (`userid`, `name`, `rollno`, `college`, `email`, `password`, `fbid`) VALUES
+(1, 'Rizwan Hakkim', '111113070', 'NITT', 'rizwan.hkm@gmail.com', NULL, '965490480195194'),
+(3, 'asdfasdf asdfasdf', 'asdfasdf', 'asdfasdf', 'asdf@asdf', 'asdfasdf', NULL);
 
 --
 -- Indexes for dumped tables
@@ -114,7 +141,19 @@ ALTER TABLE `ambassadors`
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
-  ADD PRIMARY KEY (`userid`);
+  ADD PRIMARY KEY (`groupid`);
+
+--
+-- Indexes for table `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`groupid`);
+
+--
+-- Indexes for table `usergroup`
+--
+ALTER TABLE `usergroup`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -132,12 +171,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `ambassadors`
 --
 ALTER TABLE `ambassadors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `usergroup`
+--
+ALTER TABLE `usergroup`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
