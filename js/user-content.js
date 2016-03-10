@@ -1,5 +1,16 @@
 var loggedin=0;
 var fblogin=0;
+var eventrcodes;
+var email;
+var owngroup;
+
+(function getEventMemberCount(){
+  $.get("getEventCodes.php")
+    .done(function(data){
+      eventcodes = JSON.parse(data);
+      // console.log(eventcodes);
+    });
+})();
 
 (function hideUserContent(){
   $("#synergy-user-content").hide();
@@ -67,12 +78,12 @@ function checkPassword(){
            "email":email,
            "password":password
          };
-      console.log(data);
+      // console.log(data);
       $.post("register.php",data)
         .done(function(data){
-          console.log(data);
+          // console.log(data);
             var response=JSON.parse(data);
-            console.log(response);
+            // console.log(response);
             if (response.status==="success"){
               loggedin=1;
               loadUserContent();
@@ -96,7 +107,7 @@ function checkPassword(){
       $.post("login.php",data)
         .done(function(data){
           var response=JSON.parse(data);
-          console.log(response);
+          // console.log(response);
           if (response.status==="success"){
             loggedin=1;
             $(".reg-result").empty();
@@ -119,7 +130,7 @@ function checkPassword(){
         $.post("logout.php")
           .done(function(data){
               var response=JSON.parse(data);
-              console.log(response);
+              // console.log(response);
               if (response.status==="logout"){
                 logout();
               }
@@ -129,7 +140,7 @@ function checkPassword(){
       $.post("logout.php")
         .done(function(data){
             var response=JSON.parse(data);
-            console.log(response);
+            // console.log(response);
             if (response.status==="logout"){
               logout();
             }
@@ -144,19 +155,20 @@ function loadUserContent(){
   var url="getusercontent.php";
   $.get(url)
   .done(function(data){
-    console.log(data);
     var response=JSON.parse(data);
     if (response.status=="success"){
       $("#registeredEvents").empty();
+      email = response.email;
+      owngroup = response.owngroup;
       var registeredEvents=response.registeredEvents;
       var registeredEventsCode=response.registeredEventsCode;
       var registeredEventGroupName = response.registeredEventGroupName;
+      var registeredEventGroupId = response.registeredEventGroupId;
       var i;
       for (i=0;i<registeredEvents.length;i++){
         var id="deregister_"+registeredEventsCode[i];
 
         var tag = '<tr><td>' + registeredEvents[i] + '</td><td>'+registeredEventGroupName[i]+'</td><td><div class="chip right green deregister" id="'+id+'"">Unregister    <i class="material-icons">close</i></div></td></tr>';
-        console.log(tag);
         $("#registeredEvents").append(tag);
 
         $("#"+id).on("click", (function(eventcode, groupid){
@@ -180,16 +192,33 @@ function logout(){
   $(".reg-result").empty();
 }
 
+function selectGroupId(){
+
+  var url = 'getuserdetails.php?email='+email;
+  // console.log(url);
+  $.get(url)
+    .done(function(data){
+      var userDetails = JSON.parse(data);
+      // console.log(userDetails);
+    });
+
+
+}
+
 function registerEvent(event){
-  console.log(event);
+  // console.log(event);
+  var groupId;
   if (loggedin === 1){
-    var url="eventreg.php?event=" + event;
-    console.log('asdf');
-    console.log(url);
+    if (eventcodes[event]==1){
+      groupId = owngroup
+    }else{
+      groupId = selectGroupId();
+    }
+    var url="eventreg.php?event=" + event + "&groupid=" + groupId;
     $.get(url)
     .done(function(data){
+      // console.log(data);
       var response=JSON.parse(data);
-      console.log(response);
       if (response.status==="success"){
         $("#"+event+" .reg-result").html(response.description);
         loadUserContent();
@@ -206,7 +235,7 @@ function registerEvent(event){
 }
 
 function deregisterEvent(eventcode, groupid){
-  console.log(eventcode);
+  // console.log(eventcode);
   if (loggedin === 1){
     var url="eventreg.php?event=" + eventcode + "&deregister=1&groupid="+groupid;
     $.get(url);
@@ -271,7 +300,7 @@ $("#campus-ambassador").on('click',function(e){
 
 });
 $("#campus-ambassador-reg-hide").on('click', function(){
-  console.log("hide");
+  // console.log("hide");
   $("#campus-ambassador-reg").hide();
 });
 
@@ -306,7 +335,7 @@ $("#campus-ambassador-reg-hide").on('click', function(){
          "phone":phone,
          "password":password
        };
-    console.log(data);
+    // console.log(data);
     $.post("caregister.php",data)
       .done(function(data){
           var response=JSON.parse(data);
