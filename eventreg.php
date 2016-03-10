@@ -17,10 +17,10 @@ if (!isset($_GET['deregister'])){
   $sql = "SELECT * FROM `events` WHERE `groupid`=\"$groupid\"";
   $result = executeQuery($db, $sql);
   if ($result->num_rows == 0){
-    $insert_sql = "INSERT INTO `events` (userid) VALUES (\"$userid\")";
+    $insert_sql = "INSERT INTO `events` (groupid) VALUES (\"$groupid\")";
     executeQuery($db, $insert_sql);
   }
-  $update_sql = "UPDATE `events` SET `$event`=\"1\" WHERE `userid`=\"$userid\"";
+  $update_sql = "UPDATE `events` SET `$event`=\"1\" WHERE `groupid`=\"$groupid\"";
   executeQuery($db, $update_sql);
   $message = array ("status" => "success", "description" => "You are registered", 'code' => $db->affected_rows);
   echo json_encode($message);
