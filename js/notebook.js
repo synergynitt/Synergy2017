@@ -51,13 +51,19 @@ var loadBook = function(book){
 $(document).ready(function(){
 	loadBook("fixemup");
 	loadBook("engineerofthefuture");
-	// loadBook("techyhunt");
+	loadBook("techyhunt");
 	loadBook("junkyardwars");
 	loadBook("paperpresentation");
 	loadBook("waterrocketry");
 	loadBook("sanrachana");
 	loadBook("paperplane");
 	loadBook("selfpropellingvehicle");
-	// loadBook("cadmodelling");
-	// loadBook("mcquiz");
+	loadBook("cadmodelling");
+	loadBook("mcquiz");
+
+	loadBook("automobile");
+	loadBook("3dprinting");
+	loadBook("ornithopter");
+
+
 });

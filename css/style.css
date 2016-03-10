@@ -75,6 +75,9 @@ footer img {
     border: 1px solid #2e7d32;
 }
 
+.synergy-workshops-list li{
+  cursor: pointer;  
+}
 
 section .header {
     font-size: 40px;
