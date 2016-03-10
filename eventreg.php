@@ -1,52 +1,39 @@
 <?php
 require 'connect.php';
+require 'functions.php';
+
 session_start();
 $event = mysqli_real_escape_string($db, $_GET['event']);
+$groupid = mysqli_real_escape_string($db, $_GET['groupid']);
 
 if (!isset($_SESSION['userid'])){
-  $message = array ("status"=>"logout", "description"=>"You need to log in to register");
+  $message = array ("status" => "logout", "description" => "You need to log in to register for events");
   echo json_encode($message);
   die();
 }
 
-$userid=$_SESSION['userid'];
-
 if (!isset($_GET['deregister'])){
 
-  $sql = "SELECT * FROM `events` WHERE `userid`=\"$userid\"";
-  if (!$result = $db->query($sql)){
-    $message = array ("status"=>"fail","description"=>"Can't Access Database", "error"=>$db->error);
-    echo json_encode($message);
-    die();
-  }
+  $sql = "SELECT * FROM `events` WHERE `groupid`=\"$groupid\"";
+  $result = executeQuery($db, $sql);
   if ($result->num_rows == 0){
     $insert_sql = "INSERT INTO `events` (userid) VALUES (\"$userid\")";
-    if (!$insert_result = $db->query($insert_sql)){
-      $message = array ("status"=>"fail","description"=>"User couldn't be registered", 'error'=>$db->error);
-      echo json_encode($message);
-      die();
-    }
+    executeQuery($db, $insert_sql);
   }
   $update_sql = "UPDATE `events` SET `$event`=\"1\" WHERE `userid`=\"$userid\"";
-  if (!$update_result = $db->query($update_sql)){
-    $message = array ("status"=>"fail","description"=>"User couldn't be registered", 'error'=>$db->error);
-    echo json_encode($message);
-    die();
-  }
-  $message = array ("status"=>"success","description"=>"You are registered", 'code'=>$db->affected_rows);
+  executeQuery($db, $update_sql);
+  $message = array ("status" => "success", "description" => "You are registered", 'code' => $db->affected_rows);
   echo json_encode($message);
 
 }else{
 
-  $update_sql = "UPDATE `events` SET `$event`=\"0\" WHERE `userid`=\"$userid\"";
-  if (!$update_result = $db->query($update_sql)){
-    $message = array ("status"=>"fail","description"=>"User couldn't be registered", 'error'=>$db->error);
-    echo json_encode($message);
-    die();
-  }
-  $message = array ("status"=>"deregistered","description"=>"You are deregistered", 'code'=>$db->affected_rows);
+  $update_sql = "UPDATE `events` SET `$event`=\"0\" WHERE `groupid`=\"$groupid\"";
+  executeQuery($db, $update_sql);
+  $message = array ("status" => "deregistered", "description" => "You are deregistered", 'code' => $db->affected_rows);
   echo json_encode($message);
 
 }
+
 $db->close();
- ?>
+
+?>
