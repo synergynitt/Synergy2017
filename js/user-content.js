@@ -144,24 +144,26 @@ function loadUserContent(){
   var url="getusercontent.php";
   $.get(url)
   .done(function(data){
+    console.log(data);
     var response=JSON.parse(data);
     if (response.status=="success"){
       $("#registeredEvents").empty();
       var registeredEvents=response.registeredEvents;
       var registeredEventsCode=response.registeredEventsCode;
+      var registeredEventGroupName = response.registeredEventGroupName;
       var i;
       for (i=0;i<registeredEvents.length;i++){
         var id="deregister_"+registeredEventsCode[i];
 
-        var tag = '<tr><td>' + registeredEvents[i] + '</td><td><div class="chip right green deregister" id="'+id+'"">Unregister    <i class="material-icons">close</i></div></td></tr>';
+        var tag = '<tr><td>' + registeredEvents[i] + '</td><td>'+registeredEventGroupName[i]+'</td><td><div class="chip right green deregister" id="'+id+'"">Unregister    <i class="material-icons">close</i></div></td></tr>';
         console.log(tag);
         $("#registeredEvents").append(tag);
 
-        $("#"+id).on("click", (function(eventcode){
+        $("#"+id).on("click", (function(eventcode, groupid){
           return function(){
-            deregisterEvent(eventcode);
+            deregisterEvent(eventcode, groupid);
           }
-        })(registeredEventsCode[i]) );
+        })(registeredEventsCode[i], registeredEventGroupId[i]) );
 
       }
     }else {
@@ -203,10 +205,10 @@ function registerEvent(event){
   }
 }
 
-function deregisterEvent(eventcode){
+function deregisterEvent(eventcode, groupid){
   console.log(eventcode);
   if (loggedin === 1){
-    var url="eventreg.php?event=" + eventcode + "&deregister=1";
+    var url="eventreg.php?event=" + eventcode + "&deregister=1&groupid="+groupid;
     $.get(url);
     loadUserContent();
   }else{
