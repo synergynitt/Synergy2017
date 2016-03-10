@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2016 at 04:12 AM
+-- Generation Time: Mar 10, 2016 at 10:26 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.15
 
@@ -57,13 +57,6 @@ CREATE TABLE `events` (
   `mcquiz` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `events`
---
-
-INSERT INTO `events` (`groupid`, `fixemup`, `engineerofthefuture`, `techyhunt`, `junkyardwars`, `paperpresentation`, `waterrocketry`, `sanrachana`, `paperplane`, `selfpropellingvehicle`, `cadmodelling`, `mcquiz`) VALUES
-(3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -76,13 +69,6 @@ CREATE TABLE `groups` (
   `members` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `groups`
---
-
-INSERT INTO `groups` (`groupid`, `groupname`, `members`) VALUES
-(1, 'Rizwan Hakkim', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -93,15 +79,9 @@ CREATE TABLE `usergroup` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `groupid` int(11) NOT NULL,
-  `groupname` varchar(45) NOT NULL
+  `groupname` varchar(45) NOT NULL,
+  `own` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `usergroup`
---
-
-INSERT INTO `usergroup` (`id`, `userid`, `groupid`, `groupname`) VALUES
-(1, 1, 1, 'Rizwan Hakkim');
 
 -- --------------------------------------------------------
 
@@ -118,14 +98,6 @@ CREATE TABLE `users` (
   `password` varchar(45) DEFAULT NULL,
   `fbid` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`userid`, `name`, `rollno`, `college`, `email`, `password`, `fbid`) VALUES
-(1, 'Rizwan Hakkim', '111113070', 'NITT', 'rizwan.hkm@gmail.com', NULL, '965490480195194'),
-(3, 'asdfasdf asdfasdf', 'asdfasdf', 'asdfasdf', 'asdf@asdf', 'asdfasdf', NULL);
 
 --
 -- Indexes for dumped tables
@@ -176,17 +148,17 @@ ALTER TABLE `ambassadors`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `usergroup`
 --
 ALTER TABLE `usergroup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
