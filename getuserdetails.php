@@ -1,15 +1,14 @@
 <?php
 require 'connect.php';
+require 'functions.php';
 
 $email=mysqli_real_escape_string($db, $_GET['email']);
+
 $sql = "SELECT * FROM `users` WHERE `email`=\"$email\"";
-if (!$result = $db->query($sql)){
-  $message = array ("status"=>"error","description"=>"Database Error", "error"=>$db->error);
-  echo json_encode($message);
-  die();
-}
+$result = executeQuery($db, $sql);
+
 if ($result->num_rows == 0){
-  $message = array ("status"=>"error","description"=>"User Not Registered", "error"=>$db->error);
+  $message = array ("status"=>"error","description"=>"User Not Registered");
   echo json_encode($message);
   die();
 }else{
@@ -21,11 +20,8 @@ if ($result->num_rows == 0){
   $email=$row['email'];
 
   $sql = "SELECT * FROM `usergroup` WHERE `userid`=\"$userid\"";
-  if (!$result = $db->query($sql)){
-    $message = array ("status"=>"error","description"=>"Database Error", "error"=>$db->error);
-    echo json_encode($message);
-    die();
-  }
+  $result = executeQuery($db, $sql);
+
   $groups = array('noofgroups' => $result->num_rows);
   while($row=$result->fetch_assoc()){
     $groupid=$row['groupid'];

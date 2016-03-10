@@ -1,58 +1,43 @@
 <?php
 
 require 'connect.php';
+require 'functions.php';
 
 $name=mysqli_real_escape_string($db, $_POST['name']);
 $email=mysqli_real_escape_string($db, $_POST['email']);
 
 $sql = "SELECT * FROM `users` WHERE `email`=\"$email\"";
-if (!$result = $db->query($sql)){
-  $message = array ("status"=>"fail","description"=>"User couldn't be registered", "error"=>$db->error);
-  echo json_encode($message);
-  die();
-}
+$result = executeQuery($db, $sql);
 
 if (isset($_POST['fbid'])){
   $fbid=mysqli_real_escape_string($db,$_POST['fbid']);
 
   if ($result->num_rows == 0){
+
     $insert_sql = "INSERT INTO `users` (name, email, fbid) VALUES(\"$name\",\"$email\",\"$fbid\")";
-    if (!$insert_result = $db->query($insert_sql)){
-      $message = array ("status"=>"fail","description"=>"User couldn't be registered", 'error'=>$db->error);
-      echo json_encode($message);
-      die();
-    }
+    executeQuery($db, $insert_sql);
+    $userid = getUserId($db, $email);
+    $groupid = createGroup($db,$name,1);
+    addUserToGroup($db, $userid, $groupid);
+
   }else if($row=$result->fetch_assoc()) {
 
     $fbid_indb=$row['fbid'];
     if (is_null($fbid_indb)){
       $update_sql = "UPDATE `users` SET fbid=\"$fbid\" WHERE `email`=\"$email\"";
-      if (!$update_result = $db->query($update_sql)){
-        $message = array ("status"=>"fail","description"=>"User couldn't be registered", 'error'=>$db->error);
-        echo json_encode($message);
-        die();
-      }
+      executeQuery($db, $update_sql);
     }
 
     if (isset($_POST['college'])){
       $college=mysqli_real_escape_string($db,$_POST['college']);
       $rollno=mysqli_real_escape_string($db,$_POST['rollno']);
-
       $update_sql = "UPDATE `users` SET `college`=\"$college\",`rollno`=\"$rollno\" WHERE `email`=\"$email\"";
-      if (!$update_result = $db->query($update_sql)){
-        $message = array ("status"=>"fail","description"=>"User couldn't be registered", 'error'=>$db->error);
-        echo json_encode($message);
-        die();
-      }
+      executeQuery($db, $update_sql);
     }
+
   }
 
-  if (!$result = $db->query($sql)){
-    $error = array('error'=>$db->error);
-    echo json_encode($error);
-    die();
-  }
-
+  $result = executeQuery($db, $sql);
   while ($row=$result->fetch_assoc()){
     $fbid_indb=$row['fbid'];
     if ($fbid_indb == $fbid){
@@ -64,17 +49,12 @@ if (isset($_POST['fbid'])){
         die();
       }
 
-      $userid=$row['userid'];
-      $name=$row['name'];
-      $rollno=$row['rollno'];
-      $email=$row['email'];
-
       session_start();
-      $_SESSION['userid']=$userid;
-      $_SESSION['name']=$name;
-      $_SESSION['college']=$college;
-      $_SESSION['rollno']=$rollno;
-      $_SESSION['email']=$email;
+      $_SESSION['userid']=$row['userid'];
+      $_SESSION['name']=$row['name'];
+      $_SESSION['college']=$row['college'];
+      $_SESSION['rollno']=$row['rollno'];
+      $_SESSION['email']=$row['email'];
 
       $message = array ("status" =>"success" , "description"=>"User Registered. Logged In");
       echo json_encode($message);
@@ -93,34 +73,23 @@ if (isset($_POST['password'])){
 
   if ($result->num_rows ==0){
     $insert_sql = "INSERT INTO `users` (name, college, email, password, rollno) VALUES(\"$name\",\"$college\",\"$email\",\"$password\",\"$rollno\")";
-    if (!$insert_result = $db->query($insert_sql)){
-      $message = array ("status"=>"fail","description"=>"User couldn't be registered", 'error'=>$db->error);
-      echo json_encode($message);
-      die();
-    }
+    executeQuery($db, $insert_sql);
+    $userid = getUserId($db, $email);
+    $groupid = createGroup($db,$name,1);
+    addUserToGroup($db, $userid, $groupid);
   }
-  if (!$result = $db->query($sql)){
-    echo $db->error;
-    $error = array('error'=>$db->error);
-    echo json_encode($error);
-    die();
-  }
+
+  $result = executeQuery($db, $sql);
   while ($row=$result->fetch_assoc()){
     $password_indb=$row['password'];
 
     if ($password_indb == $password){
-      $userid=$row['userid'];
-      $name=$row['name'];
-      $college=$row['college'];
-      $rollno=$row['rollno'];
-      $email=$row['email'];
-
       session_start();
-      $_SESSION['userid']=$userid;
-      $_SESSION['name']=$name;
-      $_SESSION['college']=$college;
-      $_SESSION['rollno']=$rollno;
-      $_SESSION['email']=$email;
+      $_SESSION['userid']=$row['userid'];
+      $_SESSION['name']=$row['name'];
+      $_SESSION['college']=$row['college'];
+      $_SESSION['rollno']=$row['rollno'];
+      $_SESSION['email']=$row['email'];
 
       $message = array ("status" =>"success" , "description"=>"User already registered. Logged In");
       echo json_encode($message);
