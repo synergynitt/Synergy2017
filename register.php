@@ -20,6 +20,9 @@ if (isset($_POST['fbid'])){
     $groupid = createGroup($db,$name,1);
     addUserToGroup($db, $userid, $groupid);
 
+    $update_sql = "UPDATE `usergroup` SET `own`=\"1\" WHERE `groupid`=\"$groupid\" AND `userid`=\"$userid\"";
+    executeQuery($db, $update_sql);
+
   }else if($row=$result->fetch_assoc()) {
 
     $fbid_indb=$row['fbid'];
@@ -77,6 +80,8 @@ if (isset($_POST['password'])){
     $userid = getUserId($db, $email);
     $groupid = createGroup($db,$name,1);
     addUserToGroup($db, $userid, $groupid);
+    $update_sql = "UPDATE `usergroup` SET `own`=\"1\" WHERE `groupid`=\"$groupid\" AND `userid`=\"$userid\"";
+    executeQuery($db, $update_sql);
   }
 
   $result = executeQuery($db, $sql);

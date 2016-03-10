@@ -47,4 +47,17 @@ function addUserToGroup($db, $userid, $groupid){
   }
 }
 
+function getOwnGroupId($db, $userid){
+  $sql = "SELECT * FROM `usergroup` WHERE `userid`=\"$userid\" AND `own`=\"1\"";
+  $result = executeQuery($db, $sql);
+  if ($result->num_rows == 1){
+    $row = $result->fetch_assoc();
+    $groupid = $row['groupid'];
+    return $groupid;
+  }else{
+    $message = array ("status" => "error","description" => "Own Group Error");
+    echo json_encode($message);
+    die();
+  }
+}
  ?>

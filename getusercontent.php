@@ -47,7 +47,10 @@ if (isset($_SESSION['email'])){
     }
     $noofgroups--;
   }
-  $message = array ("status" => "success", "registeredEvents" => $registeredEvents, "registeredEventsCode" => $registeredEventsCode, "registeredEventGroupId" => $registeredEventGroupId, "registeredEventGroupName" => $registeredEventGroupName);
+
+  $groupid = getOwnGroupId($db, $_SESSION['userid']);
+
+  $message = array ("status" => "success", "email" => $email, "owngroup" => $groupid, "registeredEvents" => $registeredEvents, "registeredEventsCode" => $registeredEventsCode, "registeredEventGroupId" => $registeredEventGroupId, "registeredEventGroupName" => $registeredEventGroupName);
   echo json_encode($message);
 
 }else{
