@@ -1,7 +1,7 @@
 <?php
 
 $events = array(
-  'fixemup' =>"Fix 'em Up'" ,
+  'fixemup' =>"Fix 'em Up" ,
   'engineerofthefuture' => "Engineer Of The Future",
   'techyhunt' =>"Techy Hunt" ,
   'junkyardwars' =>"Junkyard Wars" ,
