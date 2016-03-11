@@ -8,7 +8,7 @@ $sql = "SELECT * FROM `users` WHERE `email`=\"$email\"";
 $result = executeQuery($db, $sql);
 
 if ($result->num_rows == 0){
-  
+
   $message = array ("status" => "error", "description" => "User Not Registered");
   echo json_encode($message);
   die();
@@ -24,12 +24,16 @@ if ($result->num_rows == 0){
 
   $sql = "SELECT * FROM `usergroup` WHERE `userid`=\"$userid\"";
   $result = executeQuery($db, $sql);
+  $noofgroups = $result->num_rows;
 
   $groups = array();
   while($row = $result->fetch_assoc()){
     $groupid = $row['groupid'];
     $groupname = $row['groupname'];
-    $group = array('id' => $groupid, 'name' => $groupname);
+    $sql2 = "SELECT * FROM `usergroup` WHERE `groupid`=\"$groupid\"";
+    $result2 = executeQuery($db, $sql2);
+    $members = $result2->num_rows;
+    $group = array('id' => $groupid, 'name' => $groupname, 'members' => $members);
     array_push($groups, $group);
   }
 
