@@ -15,17 +15,33 @@ $events = array(
  );
 
 $eventmembers = array(
-  'fixemup' =>1 ,
-  'engineerofthefuture' => 2,
-  'techyhunt' =>3 ,
-  'junkyardwars' =>2 ,
-  'paperpresentation' =>1,
-  'waterrocketry' => 4,
-  'sanrachana' => 3,
+  'fixemup' => 1,
+  'engineerofthefuture' => 3,
+  'techyhunt' => 1,
+  'junkyardwars' => 5,
+  'paperpresentation' => 2,
+  'waterrocketry' => 3,
+  'sanrachana' => 2,
   'paperplane' => 1,
-  'selfpropellingvehicle' => 3 ,
+  'selfpropellingvehicle' => 2,
   'cadmodelling' => 1,
   'mcquiz' => 2
 );
 
+$workshops = array(
+  'automobile' => "Automobile Workshop",
+  '3dprinter' => "3D Printer Workshop",
+  'ornithopter' => "Ornithopter Workshop",
+  'robotics' => "Robotics Workshop",
+  'design' => "Design Workshop"
+
+ );
+ $workshopmembers = array(
+   'automobile' => 1,
+   '3dprinter' => 1,
+   'ornithopter' => 2,
+   'robotics' => 3,
+   'design' => 1
+
+  );
 ?>
