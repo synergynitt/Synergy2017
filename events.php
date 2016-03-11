@@ -33,18 +33,20 @@ $workshops = array(
   '3dprinter' => "3D Printer Workshop",
   'ornithopter' => "Ornithopter Workshop",
   'robotics' => "Robotics Workshop",
-  'design' => "Design Workshop",
-  'aeromodelling' => "Aero Modelling Workshop"
-
+  'aeromodelling' => "Aero Modelling Workshop",
+  'autocad' => "AutoCAD 2014 Workshop",
+  'creo' => "Creo 2.0 Workshop",
+  'solidworks' => "Solidworks 2014"
  );
- 
+
  $workshopmembers = array(
    'automobile' => 1,
    '3dprinter' => 1,
    'ornithopter' => 2,
    'robotics' => 3,
-   'design' => 1,
+   'autocad' => 1,
+   'creo' => 1,
+   'solidworks' =>1,
    'aeromodelling' => 1
-
   );
 ?>
