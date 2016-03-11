@@ -10,6 +10,7 @@ $(document).ready(function showAllContents(){
   $(".loading-screen").hide();
   $("#synergy-user-content").hide();
   $("#campus-ambassador-reg").hide();
+  $("#select-group-id").hide();
 });
 
 function timedText(text, id, callback) {
@@ -33,8 +34,8 @@ $("section").css({
 $("#campus-ambassador-reg").css({
   "min-height": window.innerHeight
 });
-$("#campus-ambassador-reg .contain").css({
-  "min-width": window.innerWidth
+$("#select-group-id").css({
+  "min-height": window.innerHeight
 });
 (function textanimation() {
     timedText("SYNERGY 2016", "#textanimdata", function(){

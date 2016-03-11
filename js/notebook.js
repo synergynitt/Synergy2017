@@ -33,7 +33,7 @@ var loadBook = function(book){
 					break;
 
 			}
-			e.preventDefault();
+			// e.preventDefault();
 		});
 	});
 
