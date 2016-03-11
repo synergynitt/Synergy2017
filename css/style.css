@@ -76,7 +76,7 @@ footer img {
 }
 
 .synergy-workshops-list li{
-  cursor: pointer;  
+  cursor: pointer;
 }
 
 section .header {
@@ -105,9 +105,7 @@ section .sub-header {
     border-radius: 3px 3px 0 0;
 
 }
-section div {
-    /*border: 1px solid #000;*/
-}
+
 .go-down{
     cursor:pointer;
 }
@@ -140,8 +138,8 @@ section div {
 .campus-ambassador-reg{
   color:black;
   position: fixed;
-  z-index: 900;
   width: 100%;
+  z-index: 900;
   background:rgba(255,255,255,1);
 }
 .campus-ambassador-reg .book-hide{
@@ -162,4 +160,27 @@ section div {
 }
 .error{
   color:#ef5350;
+}
+.select-group-id{
+  color:black;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  background:rgba(255,255,255,1);
+}
+.select-group-id .container{
+  border-radius: 5px;
+  border: 1px solid #2e7d32;
+  padding:20px;
+  top:30px;
+}
+.select-group-id .book-hide{
+  color: #000;
+  cursor: pointer;
+}
+.chip{
+  cursor: pointer;
+}
+section div {
+  /*border: 1px solid #000;*/
 }
