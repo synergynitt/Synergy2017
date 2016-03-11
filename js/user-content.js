@@ -1,6 +1,6 @@
 var loggedin=0;
 var fblogin=0;
-var eventrcodes;
+var eventcodes;
 var email;
 var owngroup;
 
@@ -192,27 +192,135 @@ function logout(){
   $(".reg-result").empty();
 }
 
-function selectGroupId(){
-
+function selectGroupId(callback, maxmembers){
+  var groupId = 0;
   var url = 'getuserdetails.php?email='+email;
-  // console.log(url);
   $.get(url)
     .done(function(data){
       var userDetails = JSON.parse(data);
-      // console.log(userDetails);
+      if (userDetails.status==="error"){
+        console.log(userDetails);
+        return;
+      }
+      var noofgroups = userDetails.user.noofgroups;
+      var groups = userDetails.user.groups;
+      $("#selectFromList").empty();
+      $("#selectFromList").show();
+      $("#registerNewGroupWindow").hide();
+      $("#select-group-id").show();
+      for (var i = 0 ; i < noofgroups; i++){
+        if (groups[i].id == owngroup || groups[i].members > maxmembers){
+          continue;
+        }
+        var tag = '<tr><td>' + groups[i].name + '</td><td>' + groups[i].members + ' Members</td><td><div class="chip right green register" id="register-' + groups[i].id + '"">Register</div></td></tr>';
+        $("#selectFromList").append(tag);
+
+        $("#register-"+groups[i].id).on("click", (function(callback , groupId){
+          return function(){
+            callback(groupId);
+            $("#select-group-id").hide();
+          }
+        })(callback, groups[i].id));
+
+      }
+      var tag = '<tr><td colspan="3" class="center-align"><div class="chip right green register" id="registerNewGroup">Register New Group </div></td></tr>';
+      $("#selectFromList").append(tag);
+
+      $("#registerNewGroup").on("click", function(){
+
+        console.log("registerNewGroup");
+        $("#selectFromList").empty();
+        $("#selectFromList").hide();
+        $("#select-group-id").show();
+        $("#registerNewGroupWindow > *").hide();
+        $("#selectGroupName").show();
+
+        $("#registerNewGroupWindow").show();
+        $("#noofmembers").attr("max", maxmembers);
+        $("#groupNameRegistrationSubmit").on("click",function () {
+          var members=$("#noofmembers").val();
+          var groupName = $("#groupName").val();
+          console.log(members, groupName);
+          if (!(groupName != "" && members != "")){
+            console.log("Cancelling");
+            $("#select-group-id").hide();
+            return;
+          }
+
+          $("#selectGroupName").hide();
+          $("#getUsersData").empty();
+
+          var tag = '<div class="col s12 m12 l6 sub-header center-align">Group Name : '+ groupName  +'</div><div class="col s12 m12 l6 sub-header center-align">Members : '+ members +'</div>';
+          $("#getUsersData").append(tag);
+          var groupUsers={};
+          var tag = '<div class="col s12 l12 m12 center-align"><div class="row fullwidth "><div class="validate center-align input-field col s12 m12 l3"><input disabled  class="validate" id="member-1-email" type="email" ></div><div class="validate center-align input-field col s12 m12 l3"><input disabled  class="validate" id="member-1-name" type="text" ></div><div class="validate center-align input-field col s12 m12 l3"><input disabled  class="validate" id="member-1-rollno" type="text" ></div><div class="validate center-align input-field col s12 m12 l3"><input disabled  class="validate" id="member-1-college" type="text" ></div></div></div>';
+          $("#getUsersData").append(tag);
+          $("#member-1-email").val(userDetails.user.email);
+          $("#member-1-name").val(userDetails.user.name);
+          $("#member-1-rollno").val(userDetails.user.rollno);
+          $("#member-1-college").val(userDetails.user.college);
+          for (var i = 2; i <= members ; i++){
+            var tag = '<div class="col s12 l12 m12 center-align"><div class="row fullwidth ">';
+            tag +='<div class=" center-align input-field col s12 m12 l3"><input  id="member-' + i + '-email" type="email" class="validate" ><label for="member-' + i + '-email">Member ' + i + ' Email </label> </div>';
+            tag +='<div class=" center-align input-field col s12 m12 l3"><input  id="member-' + i + '-name" type="text" class="validate" ><label for="member-' + i + '-name">Member ' + i + ' Name </label> </div>';
+            tag +='<div class=" center-align input-field col s12 m12 l3"><input  id="member-' + i + '-rollno" type="text" class="validate" ><label for="member-' + i + '-rollno">Member ' + i + ' Roll Number </label> </div>';
+            tag +='<div class=" center-align input-field col s12 m12 l3"><input  id="member-' + i + '-college" type="text" class="validate" ><label for="member-' + i + '-college">Member ' + i + ' College </label> </div>';
+            tag+='</div></div>';
+            $("#getUsersData").append(tag);
+          }
+          var tag ='<div class="col s12 m12 l12 center-align"><button class="btn waves-effect waves-light green darken-3" type="submit" name="action" id="getUserDataEmailSubmit">Next<i class="material-icons right">send</i></button></div>';
+          $("#getUsersData").append(tag);
+
+          $("#getUsersData").show();
+          $("#getUserDataEmailSubmit").on('click',function(){
+            console.log("get email");
+            var groupUserData=[];
+            for (var i=0; i < members; i++){
+              var memberid=i+1;
+              memberid="#member-"+memberid;
+              var userData={};
+              userData.email = $(memberid+"-email").val();
+              userData.name = $(memberid+"-name").val();
+              userData.rollno = $(memberid+"-rollno").val();
+              userData.college = $(memberid+"-college").val();
+              if (userData.email===""){
+                alert ("Email Can't be Empty");
+                $("#select-group-id").hide();
+                return;
+              }
+              groupUserData.push(userData);
+            }
+            var groupjsondata=JSON.stringify(groupUserData);
+            var data ={
+              groupjsondata:groupjsondata,
+              groupName:groupName,
+              members : members
+            }
+            $.post("registergroup.php",data)
+              .done(function(data){
+                var response=JSON.parse(data);
+                if (response.status=="success"){
+                  var groupId = response.groupid;
+                  callback(groupId);
+                  $("#select-group-id").hide();
+                }else{
+                  alert("Registration Failed");
+                  $("#select-group-id").hide();
+                  return;
+                }
+              });
+          });
+        });
+      });
     });
-
-
 }
 
 function registerEvent(event){
-  // console.log(event);
-  var groupId;
-  if (loggedin === 1){
-    if (eventcodes[event]==1){
-      groupId = owngroup
-    }else{
-      groupId = selectGroupId();
+  console.log(event);
+  function callback(groupId){
+    if (groupId == 0){
+      console.log("Selection of GroupId failed")
+      return;
     }
     var url="eventreg.php?event=" + event + "&groupid=" + groupId;
     $.get(url)
@@ -229,6 +337,16 @@ function registerEvent(event){
         logout();
       }
     });
+  }
+  if (loggedin === 1){
+    if (eventcodes[event] == 1){
+      groupId = owngroup;
+      callback(groupId);
+    }else{
+      var maxmembers = eventcodes[event];
+      console.log(maxmembers);
+      selectGroupId(callback, maxmembers);
+    }
   }else{
       $("#"+event+" .reg-result").html("You need to login to register");
   }
@@ -302,6 +420,10 @@ $("#campus-ambassador").on('click',function(e){
 $("#campus-ambassador-reg-hide").on('click', function(){
   // console.log("hide");
   $("#campus-ambassador-reg").hide();
+});
+$("#select-group-hide").on('click',function(){
+  $("#select-group-id").hide();
+  $("$select-from-list").empty();
 });
 
 (function processCARegistration(){

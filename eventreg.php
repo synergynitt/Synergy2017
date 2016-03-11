@@ -13,7 +13,11 @@ if (!isset($_SESSION['userid'])){
 }
 
 if (!isset($_GET['deregister'])){
-
+  if (!checkIfRegIsPossible($db, $groupid, $event, "events")){
+    $message = array ("status" => "fail", "description" => "Someone in this Group Already registered with an another group");
+    echo json_encode($message);
+    die();
+  }
   $sql = "SELECT * FROM `events` WHERE `groupid`=\"$groupid\"";
   $result = executeQuery($db, $sql);
   if ($result->num_rows == 0){
