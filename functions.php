@@ -26,7 +26,7 @@ function createGroup($db, $groupname, $members){
   $result = executeQuery($db, $sql);
   $row = $result->fetch_assoc();
   $groupid = $row['groupid'] + 1;
-  $insert_sql = "INSERT INTO `groups` (groupid, groupname, members) VALUES(\"$groupid\", \"$groupname\", \"1\")";
+  $insert_sql = "INSERT INTO `groups` (groupid, groupname, members) VALUES(\"$groupid\", \"$groupname\", \"$members\")";
   $insert_result = executeQuery($db, $insert_sql);
   return $groupid;
 }
@@ -60,4 +60,44 @@ function getOwnGroupId($db, $userid){
     die();
   }
 }
- ?>
+
+function getRelatedGroups($db, $groupid){
+  $sql = "SELECT * FROM `usergroup` WHERE `groupid`=\"$groupid\"";
+  $result = executeQuery($db, $sql);
+
+  $relatedGroups=array();
+  while($user=$result->fetch_assoc()){
+    $userid = $user['userid'];
+    $sql2 = "SELECT * FROM `usergroup` WHERE `userid`=\"$userid\" ";
+    $result2 = executeQuery($db, $sql2);
+    while ($group= $result2->fetch_assoc()){
+      $groupid_indb = $group['groupid'];
+      if ($groupid_indb == $groupid){
+        continue;
+      }
+      if (!in_array($groupid_indb, $relatedGroups)){
+        array_push($relatedGroups, $groupid_indb);
+      }
+    }
+  }
+  return $relatedGroups;
+}
+
+function checkIfRegIsPossible($db, $groupid, $event, $check){
+  $relatedGroups = getRelatedGroups($db, $groupid);
+  foreach ($relatedGroups as $relatedGroup) {
+    $sql = "SELECT * FROM `$check` WHERE `groupid`=\"$relatedGroup\"";
+    $result = executeQuery($db, $sql);
+    while ($row = $result->fetch_assoc()){
+      if ($row[$event] > 0){
+        return 0;
+      }
+    }
+  }
+  return 1;
+}
+// testing
+// require 'connect.php';
+// print_r(getRelatedGroups($db, 1));
+// echo checkIfRegIsPossible($db, 1, "techyhunt", "events");
+?>
