@@ -64,6 +64,9 @@ $(document).ready(function(){
 	loadBook("automobile");
 	loadBook("3dprinting");
 	loadBook("ornithopter");
+	loadBook("robotics");
+	loadBook("aeromodelling");
+	loadBook("design");
 
 
 });
