@@ -185,6 +185,18 @@ function loadUserContent(){
         })(registeredEventsCode[i], registeredEventGroupId[i]) );
 
       }
+
+      $("#registeredWorkshops").empty();
+      var registeredWorkshops =response.registeredWorkshops;
+      var registeredWorkshopsSlots = response.registeredWorkshopsSlots;
+      var registeredWorkshopsGroupName = response.registeredWorkshopsGroupName;
+      for (i = 0; i < registeredWorkshops.length; i++){
+        var tag = '<tr><td>' + registeredWorkshops[i] + '</td><td class="center-align">' + registeredWorkshopsSlots[i] + '</td><td class="center-align">' + registeredWorkshopsGroupName[i] + '</td></tr>';
+        $("#registeredWorkshops").append(tag);
+      }
+
+
+
     }else {
       logout();
     }

@@ -122,7 +122,9 @@ section .sub-header {
 .right-border{
   border-right: 1px solid #2e7d32;
 }
-
+.left-border{
+  border-left: 1px solid #2e7d32;
+}
 .deregister{
   color:#ffffff    ;
 }
