@@ -74,7 +74,7 @@ if (isset($_POST['password'])){
   $college=mysqli_real_escape_string($db, $_POST['college']);
   $rollno=mysqli_real_escape_string($db,$_POST['rollno']);
 
-  if ($result->num_rows ==0){
+  if ($result->num_rows == 0){
     $insert_sql = "INSERT INTO `users` (name, college, email, password, rollno) VALUES(\"$name\",\"$college\",\"$email\",\"$password\",\"$rollno\")";
     executeQuery($db, $insert_sql);
     $userid = getUserId($db, $email);
@@ -87,6 +87,19 @@ if (isset($_POST['password'])){
   $result = executeQuery($db, $sql);
   while ($row=$result->fetch_assoc()){
     $password_indb=$row['password'];
+    if (is_null($row['password'])){
+      $update_sql = "UPDATE `users` SET password=\"$password\" WHERE `email`=\"$email\"";
+      executeQuery($db, $update_sql);
+      $name = $row['name'];
+      $userid = $row['userid'];
+      $groupid = createGroup($db, $name,"1");
+      addUserToGroup($db, $userid, $groupid);
+      $update_sql = "UPDATE `usergroup` SET `own`=\"1\" WHERE `groupid`=\"$groupid\" AND `userid`=\"$userid\"";
+      executeQuery($db, $update_sql);
+      $result = executeQuery($db, $sql);
+      $row=$result->fetch_assoc();
+      $password_indb=$row['password'];
+    }
 
     if ($password_indb == $password){
       session_start();

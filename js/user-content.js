@@ -78,15 +78,18 @@ function checkPassword(){
            "email":email,
            "password":password
          };
-      // console.log(data);
+      console.log(data);
       $.post("register.php",data)
         .done(function(data){
-          // console.log(data);
+          console.log(data);
             var response=JSON.parse(data);
-            // console.log(response);
+            console.log(response);
             if (response.status==="success"){
               loggedin=1;
               loadUserContent();
+            }else {
+              $("#synergy-registration-status").empty();
+              $("#synergy-registration-status").html(response.description);
             }
         });
     }
@@ -114,8 +117,8 @@ function checkPassword(){
             loadUserContent();
           }else {
             loggedin=0;
-            $(".reg-result").empty();
-            $(".reg-result").html(response.description);
+            $("#synergy-registration-status").empty();
+            $("#synergy-registration-status").html(response.description);
           }
         });
       };
@@ -132,6 +135,7 @@ function checkPassword(){
               var response=JSON.parse(data);
               // console.log(response);
               if (response.status==="logout"){
+                fblogin = 0;
                 logout();
               }
           });
@@ -157,6 +161,7 @@ function loadUserContent(){
   .done(function(data){
     var response=JSON.parse(data);
     if (response.status=="success"){
+      loggedin = 1;
       $("#registeredEvents").empty();
       email = response.email;
       owngroup = response.owngroup;
@@ -423,7 +428,7 @@ $("#campus-ambassador-reg-hide").on('click', function(){
 });
 $("#select-group-hide").on('click',function(){
   $("#select-group-id").hide();
-  $("$select-from-list").empty();
+  $("#select-from-list").empty();
 });
 
 (function processCARegistration(){
@@ -475,3 +480,5 @@ $("#select-group-hide").on('click',function(){
       });
   });
 })();
+
+$(document).on("ready",loadUserContent);
