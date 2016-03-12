@@ -34,7 +34,9 @@ if (isset($_POST['fbid'])){
     if (isset($_POST['college'])){
       $college=mysqli_real_escape_string($db,$_POST['college']);
       $rollno=mysqli_real_escape_string($db,$_POST['rollno']);
-      $update_sql = "UPDATE `users` SET `college`=\"$college\",`rollno`=\"$rollno\" WHERE `email`=\"$email\"";
+      $phone=mysqli_real_escape_string($db, $_POST['phone']);
+
+      $update_sql = "UPDATE `users` SET `college`=\"$college\",`rollno`=\"$rollno\",`phone`=\"$phone\" WHERE `email`=\"$email\"";
       executeQuery($db, $update_sql);
     }
 
@@ -73,9 +75,11 @@ if (isset($_POST['password'])){
   $password=mysqli_real_escape_string($db, $_POST['password']);
   $college=mysqli_real_escape_string($db, $_POST['college']);
   $rollno=mysqli_real_escape_string($db,$_POST['rollno']);
+  $phone=mysqli_real_escape_string($db, $_POST['phone']);
+  
 
   if ($result->num_rows == 0){
-    $insert_sql = "INSERT INTO `users` (name, college, email, password, rollno) VALUES(\"$name\",\"$college\",\"$email\",\"$password\",\"$rollno\")";
+    $insert_sql = "INSERT INTO `users` (name, college, email, password, rollno, phone) VALUES(\"$name\",\"$college\",\"$email\",\"$password\",\"$rollno\",\"$phone\")";
     executeQuery($db, $insert_sql);
     $userid = getUserId($db, $email);
     $groupid = createGroup($db,$name,1);

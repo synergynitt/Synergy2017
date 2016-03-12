@@ -21,6 +21,7 @@ if ($result->num_rows == 0){
   $college = $row['college'];
   $rollno = $row['rollno'];
   $email = $row['email'];
+  $phone = $row['phone'];
 
   $sql = "SELECT * FROM `usergroup` WHERE `userid`=\"$userid\"";
   $result = executeQuery($db, $sql);
@@ -37,7 +38,7 @@ if ($result->num_rows == 0){
     array_push($groups, $group);
   }
 
-  $user = array('name' => $name , 'college' => $college, 'rollno' => $rollno, 'email'=> $email, 'noofgroups' => $result->num_rows, 'groups' => $groups );
+  $user = array('name' => $name , 'college' => $college, 'rollno' => $rollno, 'email'=> $email, 'phone'=>$phone, 'noofgroups' => $result->num_rows, 'groups' => $groups );
   $message = array ("status" => "success", "description" => "User Found", "user" => $user);
   echo json_encode($message);
 

@@ -68,6 +68,7 @@ function checkPassword(){
     var email=$("#email").val();
     var rollno=$("#rollno").val();
     var password=$("#password").val();
+    var phone = $("#phone").val();
     var isPasswordValid=checkPassword();
     var isEmailValid=$("#email").hasClass("valid");
     if (isPasswordValid && isEmailValid){
@@ -76,6 +77,7 @@ function checkPassword(){
            "college":college,
            "rollno":rollno,
            "email":email,
+           "phone":phone,
            "password":password
          };
       console.log(data);

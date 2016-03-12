@@ -48,7 +48,6 @@ function callAPI() {
         if (response.status==="success"){
           if (response.description==="Get College Details"){
             var college;
-            var rollno;
             while(college== null){
               college=prompt("Enter Your College");
             }
@@ -56,8 +55,13 @@ function callAPI() {
             while(rollno==null){
               rollno=prompt("Enter Your Rollno");
             }
+            var phone=prompt("Enter Your Phone Number");
+            while(phone==null){
+              phone=prompt("Enter Your Phone Number");
+            }
             fbdata.college=college;
             fbdata.rollno=rollno;
+            fbdata.phone=phone;
             // console.log(fbdata);
             $.post("register.php",fbdata)
               .done(function(data){
