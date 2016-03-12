@@ -613,3 +613,7 @@ $("#accomodation").on("click",function(){
 
   }
 });
+
+$("#contacts").on("click",function(){
+  $("#contactsModal").openModal();
+});
