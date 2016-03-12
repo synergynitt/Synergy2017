@@ -20,6 +20,4 @@ if (!empty($_GET['workshop'])){
   $message = array("status" => "error", "description" => "No Workshop Mentioned");
   echo json_encode($message);
 }
-
-
 ?>
