@@ -30,9 +30,27 @@ if (isset($_SESSION['email'])){
   $registeredEventGroupName = array();
   $registeredEventGroupId = array();
 
+  $registeredWorkshops =array();
+  $registeredWorkshopsSlots = array();
+  $registeredWorkshopsGroupName = array();
+
   while($noofgroups){
     $groupid = $groups[$noofgroups-1]->id;
     $groupname = $groups[$noofgroups-1]->name;
+
+    $sql = "SELECT * FROM `workshops` WHERE `groupid`=\"$groupid\"";
+    $result = executeQuery($db, $sql);
+    while ($row=$result->fetch_assoc()) {
+      foreach ($workshops as $key => $value) {
+        if ($row[$key] != 0){
+          $slot = $row[$key];
+          array_push($registeredWorkshops, "$value");
+          array_push($registeredWorkshopsSlots, "$slot");
+          array_push($registeredWorkshopsGroupName, "$groupname");
+        }
+      }
+    }
+
     $sql = "SELECT * FROM `events` WHERE `groupid`=\"$groupid\"";
     $result = executeQuery($db, $sql);
     while ($row=$result->fetch_assoc()) {
@@ -45,12 +63,13 @@ if (isset($_SESSION['email'])){
         }
       }
     }
+
     $noofgroups--;
   }
 
   $groupid = getOwnGroupId($db, $_SESSION['userid']);
 
-  $message = array ("status" => "success", "email" => $email, "owngroup" => $groupid, "registeredEvents" => $registeredEvents, "registeredEventsCode" => $registeredEventsCode, "registeredEventGroupId" => $registeredEventGroupId, "registeredEventGroupName" => $registeredEventGroupName);
+  $message = array ("status" => "success", "email" => $email, "owngroup" => $groupid, "registeredEvents" => $registeredEvents, "registeredEventsCode" => $registeredEventsCode, "registeredEventGroupId" => $registeredEventGroupId, "registeredEventGroupName" => $registeredEventGroupName, "registeredWorkshops" => $registeredWorkshops, "registeredWorkshopsSlots" => $registeredWorkshopsSlots, "registeredWorkshopsGroupName" => $registeredWorkshopsGroupName);
   echo json_encode($message);
 
 }else{
