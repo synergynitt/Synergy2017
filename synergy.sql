@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2016 at 10:26 AM
+-- Generation Time: Mar 12, 2016 at 10:52 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.15
 
@@ -19,6 +19,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `synergy`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accomodation`
+--
+
+CREATE TABLE `accomodation` (
+  `userid` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `rollno` varchar(45) DEFAULT NULL,
+  `college` varchar(45) DEFAULT NULL,
+  `email` varchar(45) NOT NULL,
+  `phone` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -51,7 +66,7 @@ CREATE TABLE `events` (
   `paperpresentation` int(11) NOT NULL DEFAULT '0',
   `waterrocketry` int(11) NOT NULL DEFAULT '0',
   `sanrachana` int(11) NOT NULL DEFAULT '0',
-  `paperplane` int(11) NOT NULL,
+  `paperplane` int(11) NOT NULL DEFAULT '0',
   `selfpropellingvehicle` int(11) NOT NULL DEFAULT '0',
   `cadmodelling` int(11) NOT NULL DEFAULT '0',
   `mcquiz` int(11) NOT NULL DEFAULT '0'
@@ -96,12 +111,38 @@ CREATE TABLE `users` (
   `college` varchar(45) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
   `password` varchar(45) DEFAULT NULL,
-  `fbid` varchar(45) DEFAULT NULL
+  `fbid` varchar(45) DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `workshops`
+--
+
+CREATE TABLE `workshops` (
+  `groupid` int(11) NOT NULL,
+  `automobile` int(11) NOT NULL DEFAULT '0',
+  `3dprinting` int(11) NOT NULL DEFAULT '0',
+  `ornithopter` int(11) NOT NULL DEFAULT '0',
+  `robotics` int(11) NOT NULL DEFAULT '0',
+  `aeromodelling` int(11) NOT NULL DEFAULT '0',
+  `autocad` int(11) NOT NULL DEFAULT '0',
+  `creo` int(11) NOT NULL DEFAULT '0',
+  `solidworks` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `accomodation`
+--
+ALTER TABLE `accomodation`
+  ADD PRIMARY KEY (`userid`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `ambassadors`
@@ -136,6 +177,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `userid` (`userid`);
 
 --
+-- Indexes for table `workshops`
+--
+ALTER TABLE `workshops`
+  ADD PRIMARY KEY (`groupid`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -148,17 +195,17 @@ ALTER TABLE `ambassadors`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `usergroup`
 --
 ALTER TABLE `usergroup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

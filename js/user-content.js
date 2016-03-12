@@ -582,3 +582,34 @@ $("#select-group-hide").on('click',function(){
 })();
 
 $(document).on("ready",loadUserContent);
+
+$("#accomodation").on("click",function(){
+  $("#registerAccomodation").off("click");
+  console.log("accomodation");
+  $("#registerAccomodationModal").openModal();
+  if (loggedin===0){
+    $("#registerAccomodationModal p").empty();
+    $("#registerAccomodationModal p").html("You need to login to register for Accomodation");
+    $("#registerAccomodation").hide();
+  }else{
+    $("#registerAccomodation").show();
+    $("#registerAccomodationModal p").empty();
+    $("#registerAccomodationModal p").html("Click on Confirm to register for Accomodation. Payment will be collected on site.");
+    $("#registerAccomodation").on("click",function(){
+      $("#registerAccomodation").hide();
+      $.get("registerAccomodation.php")
+        .done(function(data){
+          console.log(data);
+          var response = JSON.parse(data);
+          if (response.status === "success"){
+            $("#registerAccomodationModal p").empty();
+            $("#registerAccomodationModal p").html("Registered For Accomodation");
+          }else{
+            $("#registerAccomodationModal p").empty();
+            $("#registerAccomodationModal p").html(response.description);
+          }
+        });
+    });
+
+  }
+});
