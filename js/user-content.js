@@ -1,6 +1,7 @@
 var loggedin=0;
 var fblogin=0;
 var eventcodes;
+var workshopcodes;
 var email;
 var owngroup;
 
@@ -8,6 +9,14 @@ var owngroup;
   $.get("getEventCodes.php")
     .done(function(data){
       eventcodes = JSON.parse(data);
+      // console.log(eventcodes);
+    });
+})();
+
+(function getWorkshopMemberCount(){
+  $.get("getWorkshopCodes.php")
+    .done(function(data){
+      workshopcodes = JSON.parse(data);
       // console.log(eventcodes);
     });
 })();
@@ -426,6 +435,83 @@ function deregisterEvent(eventcode, groupid){
       e.preventDefault();
       registerEvent("mcquiz");
     });
+})();
+
+function registerWorkshop(workshop){
+  console.log(workshop);
+  function callback(groupId){
+    if (groupId == 0){
+      console.log("Selection of GroupId failed")
+      return;
+    }
+
+    var url="getAvailableSlots.php?workshop=" + workshop;
+    $.get(url)
+    .done(function(data){
+      console.log(data);
+      var slots = JSON.parse(data).slots;
+      console.log(slots);
+      $("#selectSlotform").empty();
+      for (var i = 0; i < slots.length; i++){
+        var tag = '<div class="input-field col s12 l12 m12"><input type="radio" id=' + slots[i] + ' name="selectSlotRadio" value ="' + slots[i] + '"><label for="' + slots[i] + '">' + slots[i] + '</label></div>';
+        $("#selectSlotform").append(tag);
+      }
+
+      $("#selectSlotModal").openModal();
+      $("#selectSlotSubmit").on("click",function (){
+        console.log("asdf");
+        var selectedRadio = $("#selectSlotform div input[type='radio']:checked");
+        var selectedSlot = 0;
+        if (selectedRadio.length >0){
+          selectedSlot = $("#selectSlotform div input[type='radio']:checked").val();
+        }
+        console.log(selectedSlot);
+        var url = "registerWorkshop.php?slot="+selectedSlot+"&groupid="+groupId;
+        window.location.href=url;
+      });
+    });
+
+  }
+  if (loggedin === 1){
+    if (workshopcodes[workshop] == 1){
+      groupId = owngroup;
+      callback(groupId);
+    }else{
+      var maxmembers = workshopcodes[workshop];
+      console.log(maxmembers);
+      selectGroupId(callback, maxmembers);
+    }
+  }else{
+      $("." + workshop + ".reg-result").html("You need to login to register");
+  }
+
+}
+
+(function workshopRegistrations(){
+  $("#automobile-register").on("click", function(){
+    registerWorkshop("automobile");
+  });
+  $("#3dprinting-register").on("click", function(){
+    registerWorkshop("3dprinting");
+  });
+  $("#ornithopter-register").on("click", function(){
+    registerWorkshop("ornithopter");
+  });
+  $("#robotics-register").on("click", function(){
+    registerWorkshop("robotics");
+  });
+  $("#aeromodelling-register").on("click", function(){
+    registerWorkshop("aeromodelling");
+  });
+  $("#autocad-register").on("click", function(){
+    registerWorkshop("autocad");
+  });
+  $("#creo-register").on("click", function(){
+    registerWorkshop("creo");
+  });
+  $("#solidworks-register").on("click", function(){
+    registerWorkshop("solidworks");
+  });
 })();
 
 $("#campus-ambassador").on('click',function(e){
