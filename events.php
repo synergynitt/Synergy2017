@@ -12,7 +12,7 @@ $events = array(
   'selfpropellingvehicle' => "Self Propelling Vehicle" ,
   'cadmodelling' => "CAD Modelling",
   'mcquiz' => "McQuiz"
- );
+);
 
 $eventmembers = array(
   'fixemup' => 1,
@@ -37,16 +37,46 @@ $workshops = array(
   'autocad' => "AutoCAD 2014 Workshop",
   'creo' => "Creo 2.0 Workshop",
   'solidworks' => "Solidworks 2014"
- );
+);
 
- $workshopmembers = array(
-   'automobile' => 1,
-   '3dprinter' => 1,
-   'ornithopter' => 2,
-   'robotics' => 3,
-   'autocad' => 1,
-   'creo' => 1,
-   'solidworks' =>1,
-   'aeromodelling' => 1
-  );
+$workshopmembers = array(
+  'automobile' => 1,
+  '3dprinter' => 1,
+  'ornithopter' => 2,
+  'robotics' => 3,
+  'autocad' => 1,
+  'creo' => 1,
+  'solidworks' =>1,
+  'aeromodelling' => 1
+);
+$workshopfee = array(
+  'automobile' => 650,
+  '3dprinter' => 1290,
+  'ornithopter' => 990,
+  'robotics' => 500,
+  'autocad' => 300,
+  'creo' => 400,
+  'solidworks' => 400,
+  'aeromodelling' =>  950
+);
+$workshopslotes = array(
+  'automobile' => array(14,15,16),
+  '3dprinter' => array(15,16),
+  'ornithopter' => array(15,16),
+  'robotics' => array(15, 16),
+  'autocad' => array(15, 16),
+  'creo' => array(15, 16),
+  'solidworks' => array(15, 16),
+  'aeromodelling' =>  array(15, 16)
+);
+$workshopslotmaxmembers = array(
+  'automobile' => array('14' => 100, '15' => 100, '16' => 100),
+  '3dprinter' => array('15' => 100, '16' => 100),
+  'ornithopter' => array('15' => 100, '16' => 100),
+  'robotics' => array('15' => 100, '16' => 100),
+  'autocad' => array('15' => 0, '16' => 100),
+  'creo' => array('15' => 100, '16' => 100),
+  'solidworks' => array('15' => 100, '16' => 100),
+  'aeromodelling' =>  array('15' => 100, '16' => 100)
+);
 ?>
