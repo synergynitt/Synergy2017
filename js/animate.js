@@ -25,6 +25,7 @@ function timedText(text, id, callback) {
             }
         }());
 }
+
 $("#textanimation").css({
    "height": window.innerHeight
 });
@@ -43,6 +44,33 @@ $("#select-group-id").css({
           timedText ("APRIL 14,15,16","#textanimdata",textanimation)
         });
     });
+}());
+
+function setBackground(i){
+  var background = "url(../images/bg"+i+".jpg) no-repeat center fixed";
+  var backgroundSize = "100% 100%";
+  $(".cover").css({
+    "background": background,
+    "background-size": backgroundSize
+  });
+}
+
+(function changingbackground(){
+  var i = 0;
+  var max = 5;
+  var timelimit = 5000;
+  for (i=0;i<=max;i++){
+    if (i === max) {
+      setTimeout(changingbackground, (max+1)*timelimit);
+    }
+    var callback = (function(i){
+      return function () {
+        console.log("setting Background to ",i);
+        setBackground(i);
+      }
+    })(i);
+    setTimeout(callback, i*timelimit );
+  }
 }());
 
 $("#workshops").on('click',function() {
