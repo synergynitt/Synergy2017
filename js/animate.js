@@ -49,9 +49,9 @@ $(".fadingbackground").children("div").css({
   "top" : 0
 });
 (function textanimation() {
-    timedText("SYNERGY 2016", "#textanimdata", function(){
-        timedText("MECHANICAL ENGINEERING SYMPOSIUM, NIT TRICHY".toUpperCase(), "#textanimdata", function(){
-          timedText ("APRIL 14,15,16","#textanimdata",textanimation)
+    timedText("MECHANICAL DEPARTMENT, NIT TRICHY PRESENTS", "#textanimdata", function(){
+        timedText("SYNERGY 2016".toUpperCase(), "#textanimdata", function(){
+          timedText ("ON APRIL 14,15,16","#textanimdata",textanimation)
         });
     });
 }());
