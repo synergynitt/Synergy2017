@@ -40,11 +40,11 @@ $("#select-group-id").css({
 });
 $(".fadingbackground").css({
   "min-height": window.innerHeight,
-  "background":"#000"
+  "background":"#000",
 });
 $(".fadingbackground").children("div").css({
   "height": window.innerHeight,
-  "width" : window.innerWidth-20,
+  "width" : window.innerWidth,
   "position" :"absolute",
   "top" : 0
 });
@@ -70,9 +70,9 @@ $(".fadingbackground").children("div").css({
   }
 }());
 function changeBackground(i){
-  $(".fadingbackground").children("div").fadeTo( 300 , 0.05);
   var divclass=".bg"+i;
-  $(divclass).fadeTo(500 , 1);
+  $(divclass).fadeTo(1000 , 1);
+  $(".fadingbackground").children("div:not("+divclass+")").fadeTo( 1000 , 0.05);
 }
 
 (function changingbackground(){
