@@ -38,6 +38,16 @@ $("#campus-ambassador-reg").css({
 $("#select-group-id").css({
   "min-height": window.innerHeight
 });
+$(".fadingbackground").css({
+  "min-height": window.innerHeight,
+  "background":"#000"
+});
+$(".fadingbackground").children("div").css({
+  "height": window.innerHeight,
+  "width" : window.innerWidth-20,
+  "position" :"absolute",
+  "top" : 0
+});
 (function textanimation() {
     timedText("SYNERGY 2016", "#textanimdata", function(){
         timedText("MECHANICAL ENGINEERING SYMPOSIUM, NIT TRICHY".toUpperCase(), "#textanimdata", function(){
@@ -46,13 +56,23 @@ $("#select-group-id").css({
     });
 }());
 
-function setBackground(i){
-  var background = "url(../images/bg"+i+".jpg) no-repeat center fixed";
-  var backgroundSize = "100% 100%";
-  $(".cover").css({
-    "background": background,
-    "background-size": backgroundSize
-  });
+(function setBackgorund() {
+  var i = 0;
+  var max = 5;
+  for (i = 0; i <= max; i++){
+    var divclass=".bg"+i;
+    var background = "url(../images/bg"+i+".jpg) no-repeat center fixed";
+    var backgroundSize = "100% 100%";
+    $(divclass).css({
+      "background": background,
+      "background-size": backgroundSize
+    });
+  }
+}());
+function changeBackground(i){
+  $(".fadingbackground").children("div").fadeTo( 300 , 0.05);
+  var divclass=".bg"+i;
+  $(divclass).fadeTo(500 , 1);
 }
 
 (function changingbackground(){
@@ -65,13 +85,14 @@ function setBackground(i){
     }
     var callback = (function(i){
       return function () {
-        console.log("setting Background to ",i);
-        setBackground(i);
+        changeBackground(i);
       }
     })(i);
     setTimeout(callback, i*timelimit );
   }
 }());
+
+
 
 $("#workshops").on('click',function() {
     $('html, body').animate({
