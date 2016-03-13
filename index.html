@@ -2,7 +2,6 @@
 <html>
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
   <title>Synergy 2016</title>
   <script src="js/jquery.min.js"></script>
   <link rel="stylesheet" href="materialize/css/materialize.min.css">
@@ -1060,7 +1059,64 @@
       <a href="#!"  class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
     </div>
   </div>
-
+  <div id="campusAmbassadorModal" class="modal">
+    <div class="modal-content">
+      <h5 class="center-align">Campus Ambassador</h5>
+      <p class="center-align">
+        <form class="col s12" id="CA-reg-form">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="CA_first_name" type="text" class="validate">
+              <label for="CA_first_name">First Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="CA_last_name" type="text" class="validate">
+              <label for="CA_last_name">Last Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="CA_college" type="text" class="validate">
+              <label for="CA_College">College</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col l4 m12 s12">
+              <input id="CA_fbname" type="text" class="validate">
+              <label for="CA_fbname">Facebook Username</label>
+            </div>
+            <div class="input-field col l4 m12 s12">
+              <input id="CA_email" type="email" class="validate">
+              <label for="CA_email" data-error="Invalid Email">Email</label>
+            </div>
+            <div class="input-field col l4 m12 s12">
+              <input id="CA_phone" type="text" class="validate">
+              <label for="CA_phone" data-error="Invalid Phone Number">Contact Number</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="CA_password" type="password" >
+              <label for="CA_password" data-error="Didn't Match">Password</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="CA_confirm_password" type="password">
+              <label for="CA_confirm_password" data-error="Didn't Match">Confirm Password</label>
+            </div>
+          </div>
+          <div class="row center-align">
+            <div class="col s12 l12 m12 center-align ca-status"></div>
+          </div>
+        </form>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn waves-effect waves-light green darken-3" type="submit" name="action" id="CA-registration-submit">Register
+        <i class="material-icons right">send</i>
+      </button>
+      <a href="#!"  class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>
 
   <a class="btn-floating btn-large waves-effect waves-light green darken-3 fixed nav-bar-button" id="nav-bar-button">
     <i class="mdi-navigation-menu"></i>
@@ -1092,72 +1148,6 @@
   </section>
   <section id="cover" class="cover">
     <div class="imagewrapper"></div>
-  </section>
-
-  <section id="campus-ambassador-reg" class="campus-ambassador-reg">
-
-    <span id="campus-ambassador-reg-hide" class="book-hide">Close </span>
-    <div class="container fullwidth">
-      <div class="row valign-wrapper">
-        <div class="valign center-align col s12 m12 l12">
-          <span class="header"> Campus Ambassador </span>
-          <br />
-          <div class="row">
-            <form class="col s12" id="CA-reg-form">
-              <div class="row">
-                <div class="input-field col s6">
-                  <input id="CA_first_name" type="text" class="validate">
-                  <label for="CA_first_name">First Name</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="CA_last_name" type="text" class="validate">
-                  <label for="CA_last_name">Last Name</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="CA_college" type="text" class="validate">
-                  <label for="CA_College">College</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col l4 m12 s12">
-                  <input id="CA_fbname" type="text" class="validate">
-                  <label for="CA_fbname">Facebook Username</label>
-                </div>
-                <div class="input-field col l4 m12 s12">
-                  <input id="CA_email" type="email" class="validate">
-                  <label for="CA_email" data-error="Invalid Email">Email</label>
-                </div>
-                <div class="input-field col l4 m12 s12">
-                  <input id="CA_phone" type="text" class="validate">
-                  <label for="CA_phone" data-error="Invalid Phone Number">Contact Number</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s6">
-                  <input id="CA_password" type="password" >
-                  <label for="CA_password" data-error="Didn't Match">Password</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="CA_confirm_password" type="password">
-                  <label for="CA_confirm_password" data-error="Didn't Match">Confirm Password</label>
-                </div>
-              </div>
-              <button class="btn waves-effect waves-light green darken-3" type="submit" name="action" id="CA-registration-submit">Register
-                <i class="material-icons right">send</i>
-              </button>
-            </form>
-
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12 l12 m12 center-align ca-status">
-        </div>
-      </div>
-    </div>
-
   </section>
 
   <section id="select-group-id" class="select-group-id">
@@ -1301,11 +1291,10 @@
 
   <section id="synergy-gl" class="synergy-workshops valign-wrapper section">
     <div class="row center center-align fullwidth gl">
-      <div class="col s12 m12 l12 center center-align">
+      <div class="center-alin"
+      <!-- <div class="col s12 m12 l12 center center-align">
         <span class="header">Guest Lectures</span>
       </div>
-      Coming Soon...
-      <!--
       <div class="card col s12 m6 l4 large hoverable">
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" src="images/asdf.jpg">

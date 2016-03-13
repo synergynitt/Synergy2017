@@ -516,16 +516,10 @@ function registerWorkshop(workshop){
 
 $("#campus-ambassador").on('click',function(e){
   e.preventDefault();
-  $('html, body').animate({
-      'scrollTop' : $("#campus-ambassador-reg").position().top
-  });
-  $("#campus-ambassador-reg").show();
+  $("#campusAmbassadorModal").openModal();
+});
 
-});
-$("#campus-ambassador-reg-hide").on('click', function(){
-  // console.log("hide");
-  $("#campus-ambassador-reg").hide();
-});
+
 $("#select-group-hide").on('click',function(){
   $("#select-group-id").hide();
   $("#select-from-list").empty();
@@ -534,6 +528,7 @@ $("#select-group-hide").on('click',function(){
 (function processCARegistration(){
   $("#CA-registration-submit").on("click", function(e){
     e.preventDefault();
+    console.log("asdf");
     $(".ca-status").empty();
     var name=$("#CA_first_name").val()+ " " +$("#CA_last_name").val();
     var college=$("#CA_college").val();
@@ -562,7 +557,7 @@ $("#select-group-hide").on('click',function(){
          "phone":phone,
          "password":password
        };
-    // console.log(data);
+    console.log(data);
     $.post("caregister.php",data)
       .done(function(data){
           var response=JSON.parse(data);
