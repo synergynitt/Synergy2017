@@ -48,6 +48,10 @@ $(".fadingbackground").children("div").css({
   "position" :"absolute",
   "top" : 0
 });
+$("section:not(#textanimation)").css({
+  "background":"rgba(0,0,0,0.5)"
+
+});
 (function textanimation() {
     timedText("MECHANICAL DEPARTMENT, NIT TRICHY PRESENTS", "#textanimdata", function(){
         timedText("SYNERGY 2016".toUpperCase(), "#textanimdata", function(){
