@@ -51,13 +51,13 @@ $workshopmembers = array(
 );
 $workshopfee = array(
   'automobile' => 650,
-  '3dprinting' => 1290,
-  'ornithopter' => 990,
-  'robotics' => 500,
+  '3dprinting' => 700,
+  'ornithopter' => 1980,
+  'robotics' => 400,
   'autocad' => 300,
   'creo' => 400,
   'solidworks' => 400,
-  'aeromodelling' =>  950
+  'aeromodelling' =>  1000
 );
 $workshopslotes = array(
   'automobile' => array(14,15,16),
@@ -71,8 +71,8 @@ $workshopslotes = array(
 );
 $workshopslotmaxmembers = array(
   'automobile' => array('14' => 100, '15' => 100, '16' => 100),
-  '3dprinting' => array('15' => 100, '16' => 100),
-  'ornithopter' => array('15' => 100, '16' => 100),
+  '3dprinting' => array('15' => 1000, '16' => 1000),
+  'ornithopter' => array('15' => 1000, '16' => 1000),
   'robotics' => array('15' => 100, '16' => 100),
   'autocad' => array('15' => 0, '16' => 100),
   'creo' => array('15' => 100, '16' => 100),
