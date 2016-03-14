@@ -61,7 +61,7 @@ $(".fadingbackground").children("div").css({
   var max = 5;
   for (i = 0; i <= max; i++){
     var divclass=".bg"+i;
-    var background = "url(../images/bg"+i+".jpg) no-repeat center fixed";
+    var background = "url(images/bg"+i+".jpg) no-repeat center fixed";
     var backgroundSize = "100% 100%";
     $(divclass).css({
       "background": background,
