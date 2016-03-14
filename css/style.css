@@ -30,7 +30,7 @@ body {
     z-index:-1;
 }
 
-.fixed {
+.fixed-button {
     position: fixed;
     z-index: 5;
 }
@@ -191,12 +191,12 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
 }
-section {
+/*section {
   color: #fff;
-}
-section a{
+}*/
+/*.events-li a{
   color :#fff;
-}
-section div {
-  /*border: 1px solid #000;*/
-}
+}*/
+/*section div {
+  border: 1px solid #000;
+}*/

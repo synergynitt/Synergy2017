@@ -11,6 +11,9 @@ $(document).ready(function showAllContents(){
   $("#synergy-user-content").hide();
   $("#campus-ambassador-reg").hide();
   $("#select-group-id").hide();
+  $("section:not(#textanimation,.cover,.book-viewport)").css({
+    "background":"rgba(255,255,255,1)"
+  });
 });
 
 function timedText(text, id, callback) {
@@ -32,9 +35,6 @@ $("#textanimation").css({
 $("section").css({
   "min-height": window.innerHeight
 });
-$("#campus-ambassador-reg").css({
-  "min-height": window.innerHeight
-});
 $("#select-group-id").css({
   "min-height": window.innerHeight
 });
@@ -48,10 +48,7 @@ $(".fadingbackground").children("div").css({
   "position" :"absolute",
   "top" : 0
 });
-$("section:not(#textanimation)").css({
-  "background":"rgba(0,0,0,0.5)"
 
-});
 (function textanimation() {
     timedText("MECHANICAL DEPARTMENT, NIT TRICHY PRESENTS", "#textanimdata", function(){
         timedText("SYNERGY 2016".toUpperCase(), "#textanimdata", function(){
