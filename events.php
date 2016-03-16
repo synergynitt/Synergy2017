@@ -47,7 +47,7 @@ $workshopmembers = array(
   'autocad' => 1,
   'creo' => 1,
   'solidworks' =>1,
-  'aeromodelling' => 1
+  'aeromodelling' => 3
 );
 $workshopfee = array(
   'automobile' => 650,
