@@ -29,8 +29,11 @@ function timedText(text, id, callback) {
 $("#textanimation").css({
    "height": window.innerHeight
 });
-$("section").css({
-  "min-height": window.innerHeight
+$(".cover").css({
+  "height": window.innerHeight
+});
+$("section:not(.cover)").css({
+  "min-height": window.innerHeight-40,
 });
 $("#campus-ambassador-reg").css({
   "min-height": window.innerHeight
@@ -51,7 +54,7 @@ $(".fadingbackground").children("div").css({
 (function textanimation() {
     timedText("MECHANICAL DEPARTMENT, NIT TRICHY PRESENTS", "#textanimdata", function(){
         timedText("SYNERGY 2016".toUpperCase(), "#textanimdata", function(){
-          timedText ("ON APRIL 14,15,16","#textanimdata",textanimation)
+          timedText ("ON APRIL 14,15,16","#textanimdata",textanimation);
         });
     });
 }());

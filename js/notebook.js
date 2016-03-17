@@ -11,6 +11,10 @@ var loadBook = function(book){
 	$(bookid + "-viewport").hide();
 
 	$(bookid + "-show").on("click", function(){
+		$(bookid + "-viewport").css({
+			"z-index":990,
+			"height":window.innerHeight
+		});
 
 		$(bookid + "-viewport").show(300);
 		// $("body").css({"overflow":"hidden"});
@@ -40,6 +44,9 @@ var loadBook = function(book){
 	$(bookid + "-hide").on("click", function(){
 
 		$(bookid + "-viewport").hide(300);
+		$(bookid + "-viewport").css({
+			"z-index":-2
+		});
 		$("body").css({"overflow": "auto"});
 		$(document).off("keydown",function(e){ });
 		$(document).unbind("keydown");
