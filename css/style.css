@@ -100,6 +100,7 @@ section .sub-header {
     border:1px solid #ccc;
     box-shadow: 0 0 7px #ccc;
     margin: 20px 30px 0 30px;
+    cursor: pointer;
 }
 
 .events-li img{
