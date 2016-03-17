@@ -97,7 +97,8 @@ section .sub-header {
     height: 200px;
     width: 200px;
     border-radius: 3px;
-    box-shadow: 0 0 7px #555;
+    border:1px solid #ccc;
+    box-shadow: 0 0 7px #ccc;
     margin: 20px 30px 0 30px;
 }
 
