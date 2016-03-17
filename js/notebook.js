@@ -16,7 +16,7 @@ var loadBook = function(book){
 			"height":window.innerHeight
 		});
 
-		$(bookid + "-viewport").show(300);
+		$(bookid + "-viewport").show();
 		// $("body").css({"overflow":"hidden"});
 
 		$(document).on("keydown",function(e){
@@ -42,8 +42,7 @@ var loadBook = function(book){
 	});
 
 	$(bookid + "-hide").on("click", function(){
-
-		$(bookid + "-viewport").hide(300);
+		$(bookid + "-viewport").hide();
 		$(bookid + "-viewport").css({
 			"z-index":-2
 		});
