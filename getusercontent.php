@@ -33,6 +33,7 @@ if (isset($_SESSION['email'])){
   $registeredWorkshops =array();
   $registeredWorkshopsSlots = array();
   $registeredWorkshopsGroupName = array();
+  $registeredWorkshopsGroupId = array();
 
   while($noofgroups){
     $groupid = $groups[$noofgroups-1]->id;
@@ -47,6 +48,7 @@ if (isset($_SESSION['email'])){
           array_push($registeredWorkshops, "$value");
           array_push($registeredWorkshopsSlots, "$slot");
           array_push($registeredWorkshopsGroupName, "$groupname");
+          array_push($registeredWorkshopsGroupId, "$groupid");
         }
       }
     }
@@ -69,7 +71,7 @@ if (isset($_SESSION['email'])){
 
   $groupid = getOwnGroupId($db, $_SESSION['userid']);
 
-  $message = array ("status" => "success", "email" => $email, "owngroup" => $groupid, "registeredEvents" => $registeredEvents, "registeredEventsCode" => $registeredEventsCode, "registeredEventGroupId" => $registeredEventGroupId, "registeredEventGroupName" => $registeredEventGroupName, "registeredWorkshops" => $registeredWorkshops, "registeredWorkshopsSlots" => $registeredWorkshopsSlots, "registeredWorkshopsGroupName" => $registeredWorkshopsGroupName);
+  $message = array ("status" => "success", "email" => $email, "owngroup" => $groupid, "registeredEvents" => $registeredEvents, "registeredEventsCode" => $registeredEventsCode, "registeredEventGroupId" => $registeredEventGroupId, "registeredEventGroupName" => $registeredEventGroupName, "registeredWorkshops" => $registeredWorkshops, "registeredWorkshopsSlots" => $registeredWorkshopsSlots, "registeredWorkshopsGroupName" => $registeredWorkshopsGroupName, "registeredWorkshopsGroupId" => $registeredWorkshopsGroupId);
   echo json_encode($message);
 
 }else{

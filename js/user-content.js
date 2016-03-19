@@ -183,8 +183,7 @@ function loadUserContent(){
       var i;
       for (i=0;i<registeredEvents.length;i++){
         var id="deregister_"+registeredEventsCode[i];
-
-        var tag = '<tr><td>' + registeredEvents[i] + '</td><td>'+registeredEventGroupName[i]+'</td><td><div class="chip right green deregister" id="'+id+'"">Unregister    <i class="material-icons">close</i></div></td></tr>';
+        var tag = '<tr><td>' + registeredEvents[i] + '</td><td>ID:' + registeredEventGroupId[i] + ", Name: " + registeredEventGroupName[i] + '</td><td><div class="chip right green deregister" id="' + id + '"">Unregister    <i class="material-icons">close</i></div></td></tr>';
         $("#registeredEvents").append(tag);
 
         $("#"+id).on("click", (function(eventcode, groupid){
@@ -192,24 +191,19 @@ function loadUserContent(){
             deregisterEvent(eventcode, groupid);
           }
         })(registeredEventsCode[i], registeredEventGroupId[i]) );
-
       }
-
       $("#registeredWorkshops").empty();
       var registeredWorkshops =response.registeredWorkshops;
       var registeredWorkshopsSlots = response.registeredWorkshopsSlots;
       var registeredWorkshopsGroupName = response.registeredWorkshopsGroupName;
+      var registeredWorkshopsGroupId = response.registeredWorkshopsGroupId;
       for (i = 0; i < registeredWorkshops.length; i++){
-        var tag = '<tr><td>' + registeredWorkshops[i] + '</td><td class="center-align">' + registeredWorkshopsSlots[i] + '</td><td class="center-align">' + registeredWorkshopsGroupName[i] + '</td></tr>';
+        var tag = '<tr><td>' + registeredWorkshops[i] + '</td><td class="center-align"> On ' + registeredWorkshopsSlots[i] + 'th </td><td class="center-align"> ID: ' + registeredWorkshopsGroupId[i] + ", Name: " + registeredWorkshopsGroupName[i] + '</td></tr>';
         $("#registeredWorkshops").append(tag);
       }
-
-
-
     }else {
       logout();
     }
-
   });
 }
 
