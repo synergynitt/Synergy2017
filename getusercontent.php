@@ -8,16 +8,45 @@ session_start();
 if (isset($_SESSION['email'])){
 
   $email = $_SESSION['email'];
-  $url = "http://$_SERVER[HTTP_HOST]/getuserdetails.php?email=$email";
-  $ch = curl_init();
-  curl_setopt_array(
-    $ch, array(
-    CURLOPT_URL => $url,
-    CURLOPT_RETURNTRANSFER => true
-    )
-  );
-  $response = curl_exec($ch);
-  $response = json_decode($response);
+  $sql = "SELECT * FROM `users` WHERE `email`=\"$email\"";
+  $result = executeQuery($db, $sql);
+
+  if ($result->num_rows == 0){
+
+    $message = array ("status" => "error", "description" => "User Not Registered");
+    $ch = json_encode($message);
+    die();
+
+  }else{
+
+    $row = $result->fetch_assoc();
+    $userid = $row['userid'];
+    $name = $row['name'];
+    $college = $row['college'];
+    $rollno = $row['rollno'];
+    $email = $row['email'];
+    $phone = $row['phone'];
+
+    $sql = "SELECT * FROM `usergroup` WHERE `userid`=\"$userid\"";
+    $result = executeQuery($db, $sql);
+    $noofgroups = $result->num_rows;
+
+    $groups = array();
+    while($row = $result->fetch_assoc()){
+      $groupid = $row['groupid'];
+      $groupname = $row['groupname'];
+      $sql2 = "SELECT * FROM `usergroup` WHERE `groupid`=\"$groupid\"";
+      $result2 = executeQuery($db, $sql2);
+      $members = $result2->num_rows;
+      $group = array('id' => $groupid, 'name' => $groupname, 'members' => $members);
+      array_push($groups, $group);
+    }
+
+    $user = array('name' => $name , 'college' => $college, 'rollno' => $rollno, 'email'=> $email, 'phone'=>$phone, 'noofgroups' => $result->num_rows, 'groups' => $groups );
+    $message = array ("status" => "success", "description" => "User Found", "user" => $user);
+    $ch = json_encode($message);
+  }
+  $response = json_decode($ch);
   if ($response->status == "error"){
     echo json_encode($response);
     die();
