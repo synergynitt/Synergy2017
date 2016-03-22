@@ -1,3 +1,8 @@
+<?php
+require 'functions.php';
+require 'connect.php';
+require 'events.php';
+ ?>
 <!doctype html>
 <html>
 <head>
@@ -25,9 +30,6 @@
     }
   }
   if ($loggedin == 1){
-    require 'functions.php';
-    require 'connect.php';
-    require 'events.php';
     ?>
     <section class="eventregistrationlist">
       <?php
@@ -80,6 +82,87 @@
         </table>
         <?php
       }
+      ?>
+    </section>
+    <div class="divider"></div>
+    <section class="CARegistrationList">
+      <?php
+      $sqlCARegistration = "SELECT * FROM `ambassadors`";
+      $CARegistrationResult = executeQuery($db, $sqlCARegistration);
+      ?>
+      <div class="header">Campus Ambassodors (Total Registration: <?php echo $CARegistrationResult->num_rows ?>)</div>
+      <table class="striped highlight">
+        <thead>
+          <th>Name</th>
+          <th>College</th>
+          <th>FB Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+        </thead>
+        <tbody>
+        <?php
+        while($row=$CARegistrationResult->fetch_assoc()){
+          $name = $row['name'];
+          $college = $row['college'];
+          $fbname = $row['fbname'];
+          $email = $row['email'];
+          $phone = $row['phone'];
+          ?>
+          <tr>
+            <td><?php echo $name ?></td>
+            <td><?php echo $college ?></td>
+            <td><?php echo $fbname ?></td>
+            <td><?php echo $email ?></td>
+            <td><?php echo $phone ?></td>
+          </tr>
+          <?php
+        }
+         ?>
+        </tbody>
+      </table>
+      <?php
+      ?>
+    </section>
+    <div class="divider"></div>
+    <section class="accomodationregistrationlist">
+      <?php
+      $sqlAccomodationRegistration = "SELECT * FROM `accomodation`";
+      $accomodationRegistrationResult = executeQuery($db, $sqlAccomodationRegistration);
+      ?>
+      <div class="header">Accomodation (Total Registration: <?php echo $accomodationRegistrationResult->num_rows ?>)</div>
+      <table class="striped highlight">
+        <thead>
+          <th>User ID</th>
+          <th>Name</th>
+          <th>Rollno</th>
+          <th>College</th>
+          <th>Email</th>
+          <th>Phone</th>
+        </thead>
+        <tbody>
+        <?php
+        while($row=$accomodationRegistrationResult->fetch_assoc()){
+          $userid = $row['userid'];
+          $name = $row['name'];
+          $college = $row['college'];
+          $rollno = $row['rollno'];
+          $email = $row['email'];
+          $phone = $row['phone'];
+          ?>
+          <tr>
+            <td><?php echo $userid ?></td>
+            <td><?php echo $name ?></td>
+            <td><?php echo $rollno ?></td>
+            <td><?php echo $college ?></td>
+            <td><?php echo $email ?></td>
+            <td><?php echo $phone ?></td>
+          </tr>
+          <?php
+        }
+         ?>
+        </tbody>
+      </table>
+      <?php
       ?>
     </section>
     <?php
