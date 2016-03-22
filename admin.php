@@ -2,7 +2,7 @@
 require 'functions.php';
 require 'connect.php';
 require 'events.php';
- ?>
+?>
 <!doctype html>
 <html>
 <head>
@@ -17,6 +17,7 @@ require 'events.php';
   <link rel="stylesheet" href="css/slider.css">
   <link rel="stylesheet" href="css/notebook.css" type="text/css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 
@@ -31,6 +32,28 @@ require 'events.php';
   }
   if ($loggedin == 1){
     ?>
+    <section class="navigationbar">
+      <ul id="dropdown1" class="dropdown-content">
+        <?php
+        foreach ($events as $event => $eventName) {
+          ?>
+          <li><a href="#<?php echo $event ?>"><?php echo $eventName ?></a></li>
+          <?php
+        }
+        ?>
+      </ul>
+      <div class="navbar-fixed">
+        <nav>
+          <div class="nav-wrapper green darken-2">
+            <ul class="left hide-on-med-and-down">
+               <li><a class="dropdown-button" href="#!" data-activates="dropdown1" >Events Registration List<i class="material-icons right">arrow_drop_down</i></a></li>
+               <li><a href="#CARegistrationList">Campus Ambassadors</a></li>
+              <li><a href="#accomodationregistrationlist">Accomodation</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </section>
     <section class="eventregistrationlist">
       <?php
       foreach ($events as $event => $eventName) {
@@ -38,7 +61,7 @@ require 'events.php';
         $selectEventResult = executeQuery($db,$sqlSelectEvent);
         if ($selectEventResult->num_rows>0){
           ?>
-          <div class="header"> <?php echo $eventName ?> (Total Registrations:<?php echo $selectEventResult->num_rows ?>)</div>
+          <div class="header" id = "<?php echo $event; ?>"> <?php echo $eventName ?> (Total Registrations:<?php echo $selectEventResult->num_rows ?>)</div>
           <table class="striped highlight">
             <thead>
               <tr>
@@ -85,7 +108,7 @@ require 'events.php';
       ?>
     </section>
     <div class="divider"></div>
-    <section class="CARegistrationList">
+    <section class="CARegistrationList" id="CARegistrationList">
       <?php
       $sqlCARegistration = "SELECT * FROM `ambassadors`";
       $CARegistrationResult = executeQuery($db, $sqlCARegistration);
@@ -100,31 +123,31 @@ require 'events.php';
           <th>Phone</th>
         </thead>
         <tbody>
-        <?php
-        while($row=$CARegistrationResult->fetch_assoc()){
-          $name = $row['name'];
-          $college = $row['college'];
-          $fbname = $row['fbname'];
-          $email = $row['email'];
-          $phone = $row['phone'];
-          ?>
-          <tr>
-            <td><?php echo $name ?></td>
-            <td><?php echo $college ?></td>
-            <td><?php echo $fbname ?></td>
-            <td><?php echo $email ?></td>
-            <td><?php echo $phone ?></td>
-          </tr>
           <?php
-        }
-         ?>
+          while($row=$CARegistrationResult->fetch_assoc()){
+            $name = $row['name'];
+            $college = $row['college'];
+            $fbname = $row['fbname'];
+            $email = $row['email'];
+            $phone = $row['phone'];
+            ?>
+            <tr>
+              <td><?php echo $name ?></td>
+              <td><?php echo $college ?></td>
+              <td><?php echo $fbname ?></td>
+              <td><?php echo $email ?></td>
+              <td><?php echo $phone ?></td>
+            </tr>
+            <?php
+          }
+          ?>
         </tbody>
       </table>
       <?php
       ?>
     </section>
     <div class="divider"></div>
-    <section class="accomodationregistrationlist">
+    <section class="accomodationregistrationlist" id="accomodationregistrationlist">
       <?php
       $sqlAccomodationRegistration = "SELECT * FROM `accomodation`";
       $accomodationRegistrationResult = executeQuery($db, $sqlAccomodationRegistration);
@@ -140,26 +163,26 @@ require 'events.php';
           <th>Phone</th>
         </thead>
         <tbody>
-        <?php
-        while($row=$accomodationRegistrationResult->fetch_assoc()){
-          $userid = $row['userid'];
-          $name = $row['name'];
-          $college = $row['college'];
-          $rollno = $row['rollno'];
-          $email = $row['email'];
-          $phone = $row['phone'];
-          ?>
-          <tr>
-            <td><?php echo $userid ?></td>
-            <td><?php echo $name ?></td>
-            <td><?php echo $rollno ?></td>
-            <td><?php echo $college ?></td>
-            <td><?php echo $email ?></td>
-            <td><?php echo $phone ?></td>
-          </tr>
           <?php
-        }
-         ?>
+          while($row=$accomodationRegistrationResult->fetch_assoc()){
+            $userid = $row['userid'];
+            $name = $row['name'];
+            $college = $row['college'];
+            $rollno = $row['rollno'];
+            $email = $row['email'];
+            $phone = $row['phone'];
+            ?>
+            <tr>
+              <td><?php echo $userid ?></td>
+              <td><?php echo $name ?></td>
+              <td><?php echo $rollno ?></td>
+              <td><?php echo $college ?></td>
+              <td><?php echo $email ?></td>
+              <td><?php echo $phone ?></td>
+            </tr>
+            <?php
+          }
+          ?>
         </tbody>
       </table>
       <?php
@@ -202,5 +225,23 @@ require 'events.php';
     <?php
   }
   ?>
+  <script type="text/javascript">
+  $("a:not(.dropdown-button)").click(function(e){
+    // console.log(this);
+    var link = $(this).attr('href');
+    // console.log(link);
+    if (link!="#!"){
+      e.preventDefault();
+      console.log($(link).attr("id"));
+      $(link).animate
+      $('html, body').animate({
+        scrollTop: $(link).offset().top-70
+      }, 800);
+
+    }else{
+      console.log("hello");
+    }
+  });
+  </script>
 </body>
 </html>
