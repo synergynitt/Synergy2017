@@ -201,8 +201,7 @@ function loadUserContent(){
         var tag = '<tr><td>' + registeredWorkshops[i] + '</td><td class="center-align"> On ' + registeredWorkshopsSlots[i] + 'th </td><td class="center-align"> ID: ' + registeredWorkshopsGroupId[i] + ", Name: " + registeredWorkshopsGroupName[i] + '</td></tr>';
         $("#registeredWorkshops").append(tag);
       }
-      // var tag = '<tr><td>' + registeredWorkshops[i] + '</td><td class="center-align"> On ' + registeredWorkshopsSlots[i] + 'th </td><td class="center-align"> ID: ' + registeredWorkshopsGroupId[i] + ", Name: " + registeredWorkshopsGroupName[i] + '</td></tr>';
-      var tag = "<td><td colospan='3'>Registrations  in Workshops are currently done using TheCollegeFever.com</td></tr>"
+      var tag = "<tr><td colspan='3' class='center-align'><span style='font-size:14px;font-weight:bold'>Payents for workshops are processed through TheCollegeFever.com. You can also pay onsite on the day of Synergy</span></td></tr>"
       $("#registeredWorkshops").append(tag);
     }else {
       logout();
@@ -435,53 +434,69 @@ function deregisterEvent(eventcode, groupid){
 })();
 
 function registerWorkshop(workshop){
-  // console.log(workshop);
-  // function callback(groupId){
-  //   if (groupId == 0){
-  //     console.log("Selection of GroupId failed")
-  //     return;
-  //   }
-  //
-  //   var url="getAvailableSlots.php?workshop=" + workshop;
-  //   $.get(url)
-  //   .done(function(data){
-  //     console.log(data);
-  //     var slots = JSON.parse(data).slots;
-  //     console.log(slots);
-  //     $("#selectSlotform").empty();
-  //     for (var i = 0; i < slots.length; i++){
-  //       var tag = '<div class="input-field col s12 l12 m12"><input type="radio" id=' + slots[i] + ' name="selectSlotRadio" value ="' + slots[i] + '"><label for="' + slots[i] + '">' + slots[i] + '</label></div>';
-  //       $("#selectSlotform").append(tag);
-  //     }
-  //
-  //     $("#selectSlotModal").openModal();
-  //     $("#selectSlotSubmit").on("click",function (){
-  //       console.log("asdf");
-  //       var selectedRadio = $("#selectSlotform div input[type='radio']:checked");
-  //       var selectedSlot = 0;
-  //       if (selectedRadio.length >0){
-  //         selectedSlot = $("#selectSlotform div input[type='radio']:checked").val();
-  //       }
-  //       console.log(selectedSlot);
-        // var url = "registerWorkshop.php?slot="+selectedSlot+"&groupid="+groupId;
-        var url = 'http://thecollegefever.com/synergy';
-        window.location.href=url;
-      // });
-    // });
+  console.log(workshop);
+  function callback(groupId){
+    if (groupId == 0){
+      console.log("Selection of GroupId failed")
+      return;
+    }
 
-  // }
-  // if (loggedin === 1){
-  //   if (workshopcodes[workshop] == 1){
-  //     groupId = owngroup;
-  //     callback(groupId);
-  //   }else{
-  //     var maxmembers = workshopcodes[workshop];
-  //     console.log(maxmembers);
-  //     selectGroupId(callback, maxmembers);
-  //   }
-  // }else{
-  //     $("." + workshop + ".reg-result").html("You need to login to register");
-  // }
+    var url="getAvailableSlots.php?workshop=" + workshop;
+    $.get(url)
+    .done(function(data){
+      console.log(data);
+      var slots = JSON.parse(data).slots;
+      console.log(slots);
+      $("#selectSlotform").empty();
+      for (var i = 0; i < slots.length; i++){
+        var tag = '<div class="input-field col s12 l12 m12"><input type="radio" id=' + slots[i] + ' name="selectSlotRadio" value ="' + slots[i] + '"><label for="' + slots[i] + '">' + slots[i] + '</label></div>';
+        $("#selectSlotform").append(tag);
+      }
+
+      $("#selectSlotModal").openModal();
+      $("#selectSlotSubmit").on("click",function (){
+        console.log("asdf");
+        var selectedRadio = $("#selectSlotform div input[type='radio']:checked");
+        var selectedSlot = 0;
+        if (selectedRadio.length >0){
+          selectedSlot = $("#selectSlotform div input[type='radio']:checked").val();
+        }
+        console.log(selectedSlot);
+        var url = "registerWorkshop.php?slot="+selectedSlot+"&groupid="+groupId+"&workshop="+workshop;
+        $.get(url)
+          .done(function(data){
+
+            var response=JSON.parse(data);
+            if (response.status==="success"){
+              $("#"+workshop+" .reg-result").html(response.description);
+              loadUserContent();
+              var url = 'http://thecollegefever.com/synergy';
+              window.location.href=url;
+            }else if (response.status==="fail"){
+              $("#"+workshop+" .reg-result").html(response.description);
+            }else if (response.status==="logout"){
+              $("#"+workshop+" .reg-result").html(response.description);
+              logout();
+            }
+
+          })
+
+      });
+    });
+
+  }
+  if (loggedin === 1){
+    if (workshopcodes[workshop] == 1){
+      groupId = owngroup;
+      callback(groupId);
+    }else{
+      var maxmembers = workshopcodes[workshop];
+      console.log(maxmembers);
+      selectGroupId(callback, maxmembers);
+    }
+  }else{
+      $("." + workshop + ".reg-result").html("You need to login to register");
+  }
 
 }
 
