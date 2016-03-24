@@ -42,11 +42,21 @@ require 'events.php';
         }
         ?>
       </ul>
+      <ul id="dropdown2" class="dropdown-content">
+        <?php
+        foreach ($workshops as $workshop => $workshopName) {
+          ?>
+          <li><a href="#<?php echo $workshop ?>"><?php echo $workshopName ?></a></li>
+          <?php
+        }
+        ?>
+      </ul>
       <div class="navbar-fixed">
         <nav>
           <div class="nav-wrapper green darken-2">
             <ul class="left hide-on-med-and-down">
-               <li><a class="dropdown-button" href="#!" data-activates="dropdown1" >Events Registration List<i class="material-icons right">arrow_drop_down</i></a></li>
+              <li><a class="dropdown-button" href="#!" data-activates="dropdown1" >Events Registration List<i class="material-icons right">arrow_drop_down</i></a></li>
+               <li><a class="dropdown-button" href="#!" data-activates="dropdown2" >Workshops Registration List<i class="material-icons right">arrow_drop_down</i></a></li>
                <li><a href="#CARegistrationList">Campus Ambassadors</a></li>
               <li><a href="#accomodationregistrationlist">Accomodation</a></li>
             </ul>
@@ -96,6 +106,63 @@ require 'events.php';
                   <td><?php echo $groupid ?></td>
                   <td><?php echo $groupName ?></td>
                   <td><?php $groupMembers = trim($groupMembers, ", "); echo $groupMembers ?></td>
+                </tr>
+                <?php
+              }
+            }
+            ?>
+          </tbody>
+        </table>
+        <?php
+      }
+      ?>
+    </section>
+    <div class="divider"></div>
+    <section class="workshopRegistrationsList">
+      <?php
+      foreach ($workshops as $workshop => $workshopName) {
+        $sqlSelectWorkshop= "SELECT * FROM `workshops` WHERE `$workshop`<>'0' ORDER BY `$workshop` ";
+        $selectWorkshopResult = executeQuery($db,$sqlSelectWorkshop);
+        if ($selectWorkshopResult->num_rows>0){
+          ?>
+          <div class="header" id = "<?php echo $workshop; ?>"> <?php echo $workshopName ?> (Total Registrations:<?php echo $selectWorkshopResult->num_rows ?>)</div>
+          <table class="striped highlight">
+            <thead>
+              <tr>
+                <th>Group ID</th>
+                <th>Group Name</th>
+                <th>Members</th>
+                <th>Slot</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              while($groupRegisteredForWorkshop = $selectWorkshopResult->fetch_assoc()){
+                $groupid= $groupRegisteredForWorkshop['groupid'];
+                $slot = $groupRegisteredForWorkshop[$workshop];
+                $sqlSelectGroup = "SELECT * FROM `groups` WHERE `groupid` =\"$groupid\"";
+                $selectGroupResult = executeQuery($db, $sqlSelectGroup);
+                $group = $selectGroupResult->fetch_assoc();
+                $groupName = $group['groupname'];
+                $sqlSelectGroupMembers = "SELECT * FROM `usergroup` WHERE `groupid`=\"$groupid\"";
+                $selectGroupMembersResult = executeQuery($db, $sqlSelectGroupMembers);
+                $groupMembers="";
+                if ($selectGroupMembersResult->num_rows>0){
+                  while ($groupMember = $selectGroupMembersResult->fetch_assoc()){
+                    $userid=$groupMember['userid'];
+                    $sqlSelectUser = "SELECT * FROM `users` WHERE  `userid`=\"$userid\"";
+                    $selectUserResult = executeQuery($db, $sqlSelectUser);
+                    $username = $selectUserResult->fetch_assoc();
+                    $username = $username['name'];
+                    $groupMembers .= $username . ", ";
+                  }
+                }
+                ?>
+                <tr>
+                  <td><?php echo $groupid ?></td>
+                  <td><?php echo $groupName ?></td>
+                  <td><?php $groupMembers = trim($groupMembers, ", "); echo $groupMembers ?></td>
+                  <td><?php echo $slot ?></td>
                 </tr>
                 <?php
               }

@@ -20,22 +20,13 @@ form {
   border: 1px solid #00796b;
   border-radius: 3px;
 }
-.eventregistrationlist{
+.eventregistrationlist, .accomodationregistrationlist, .CARegistrationList, .workshopRegistrationsList{
   padding: 40px;
 }
 td {
   width: 200px;
   font-weight: 400;
 }
-.accomodationregistrationlist{
-  padding: 40px;
-}
-.accomodationregistrationlist td{
-  width: 150px;
-}
-.CARegistrationList {
-  padding: 40px;
-}
-.CARegistrationList td{
+.accomodationregistrationlist td, .CARegistrationList td{
   width: 150px;
 }
