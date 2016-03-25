@@ -104,8 +104,8 @@ require 'events.php';
                 ?>
                 <tr>
                   <td><?php echo $groupid ?></td>
-                  <td><?php echo $groupName ?></td>
-                  <td><?php $groupMembers = trim($groupMembers, ", "); echo $groupMembers ?></td>
+                  <td><?php echo ucwords($groupName) ?></td>
+                  <td><?php $groupMembers = trim($groupMembers, ", "); echo ucwords($groupMembers) ?></td>
                 </tr>
                 <?php
               }
@@ -160,8 +160,8 @@ require 'events.php';
                 ?>
                 <tr>
                   <td><?php echo $groupid ?></td>
-                  <td><?php echo $groupName ?></td>
-                  <td><?php $groupMembers = trim($groupMembers, ", "); echo $groupMembers ?></td>
+                  <td><?php echo ucwords($groupName) ?></td>
+                  <td><?php $groupMembers = trim($groupMembers, ", "); echo ucwords($groupMembers) ?></td>
                   <td><?php echo $slot ?></td>
                 </tr>
                 <?php
@@ -199,8 +199,8 @@ require 'events.php';
             $phone = $row['phone'];
             ?>
             <tr>
-              <td><?php echo $name ?></td>
-              <td><?php echo $college ?></td>
+              <td><?php echo ucwords($name) ?></td>
+              <td><?php echo ucwords($college) ?></td>
               <td><?php echo $fbname ?></td>
               <td><?php echo $email ?></td>
               <td><?php echo $phone ?></td>
@@ -241,9 +241,9 @@ require 'events.php';
             ?>
             <tr>
               <td><?php echo $userid ?></td>
-              <td><?php echo $name ?></td>
+              <td><?php echo ucwords($name) ?></td>
               <td><?php echo $rollno ?></td>
-              <td><?php echo $college ?></td>
+              <td><?php echo ucwords($college) ?></td>
               <td><?php echo $email ?></td>
               <td><?php echo $phone ?></td>
             </tr>
