@@ -87,7 +87,7 @@ require 'events.php';
                 $sqlSelectGroup = "SELECT * FROM `groups` WHERE `groupid` =\"$groupid\"";
                 $selectGroupResult = executeQuery($db, $sqlSelectGroup);
                 $group = $selectGroupResult->fetch_assoc();
-                $groupName = $group['groupname'];
+                $groupName = str_replace('.',' ',$group['groupname']);
                 $sqlSelectGroupMembers = "SELECT * FROM `usergroup` WHERE `groupid`=\"$groupid\"";
                 $selectGroupMembersResult = executeQuery($db, $sqlSelectGroupMembers);
                 $groupMembers="";
@@ -104,8 +104,8 @@ require 'events.php';
                 ?>
                 <tr>
                   <td><?php echo $groupid ?></td>
-                  <td><?php echo ucwords($groupName) ?></td>
-                  <td><?php $groupMembers = trim($groupMembers, ", "); echo ucwords($groupMembers) ?></td>
+                  <td><?php echo ucwords(strtolower($groupName)) ?></td>
+                  <td><?php $groupMembers = str_replace('.',' ',trim($groupMembers, ", ")); echo ucwords(strtolower($groupMembers)) ?></td>
                 </tr>
                 <?php
               }
@@ -143,7 +143,7 @@ require 'events.php';
                 $sqlSelectGroup = "SELECT * FROM `groups` WHERE `groupid` =\"$groupid\"";
                 $selectGroupResult = executeQuery($db, $sqlSelectGroup);
                 $group = $selectGroupResult->fetch_assoc();
-                $groupName = $group['groupname'];
+                $groupName = str_replace('.',' ',$group['groupname']);
                 $sqlSelectGroupMembers = "SELECT * FROM `usergroup` WHERE `groupid`=\"$groupid\"";
                 $selectGroupMembersResult = executeQuery($db, $sqlSelectGroupMembers);
                 $groupMembers="";
@@ -160,8 +160,8 @@ require 'events.php';
                 ?>
                 <tr>
                   <td><?php echo $groupid ?></td>
-                  <td><?php echo ucwords($groupName) ?></td>
-                  <td><?php $groupMembers = trim($groupMembers, ", "); echo ucwords($groupMembers) ?></td>
+                  <td><?php echo ucwords(strtolower($groupName)) ?></td>
+                  <td><?php $groupMembers = str_replace('.',' ',trim($groupMembers, ", ")); echo ucwords(strtolower($groupMembers)) ?></td>
                   <td><?php echo $slot ?></td>
                 </tr>
                 <?php
@@ -192,14 +192,14 @@ require 'events.php';
         <tbody>
           <?php
           while($row=$CARegistrationResult->fetch_assoc()){
-            $name = $row['name'];
-            $college = $row['college'];
+            $name = str_replace('.',' ',$row['name']);
+            $college = str_replace('.',' ',$row['college']);
             $fbname = $row['fbname'];
             $email = $row['email'];
             $phone = $row['phone'];
             ?>
             <tr>
-              <td><?php echo ucwords($name) ?></td>
+              <td><?php echo ucwords(strtolower($name)) ?></td>
               <td><?php echo ucwords($college) ?></td>
               <td><?php echo $fbname ?></td>
               <td><?php echo $email ?></td>
@@ -233,15 +233,15 @@ require 'events.php';
           <?php
           while($row=$accomodationRegistrationResult->fetch_assoc()){
             $userid = $row['userid'];
-            $name = $row['name'];
-            $college = $row['college'];
+            $name = str_replace('.',' ',$row['name']);
+            $college = str_replace('.',' ',$row['college']);
             $rollno = $row['rollno'];
             $email = $row['email'];
             $phone = $row['phone'];
             ?>
             <tr>
               <td><?php echo $userid ?></td>
-              <td><?php echo ucwords($name) ?></td>
+              <td><?php echo ucwords(strtolower($name)) ?></td>
               <td><?php echo $rollno ?></td>
               <td><?php echo ucwords($college) ?></td>
               <td><?php echo $email ?></td>
