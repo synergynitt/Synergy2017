@@ -232,11 +232,12 @@ function selectGroupId(callback, maxmembers){
       $("#selectFromList").show();
       $("#registerNewGroupWindow").hide();
       $("#select-group-id").show();
+      var tag;
       for (var i = 0 ; i < noofgroups; i++){
         if (groups[i].id == owngroup || groups[i].members > maxmembers){
           continue;
         }
-        var tag = '<tr><td>' + groups[i].name + '</td><td>' + groups[i].members + ' Members</td><td><div class="chip right green register" id="register-' + groups[i].id + '"">Register</div></td></tr>';
+        tag = '<tr><td>' + groups[i].name + '</td><td>' + groups[i].members + ' Members</td><td><div class="chip right green register" id="register-' + groups[i].id + '"">Register</div></td></tr>';
         $("#selectFromList").append(tag);
 
         $("#register-"+groups[i].id).on("click", (function(callback , groupId){
@@ -247,7 +248,7 @@ function selectGroupId(callback, maxmembers){
         })(callback, groups[i].id));
 
       }
-      var tag = '<tr><td colspan="3" class="center-align"><div class="chip right green register" id="registerNewGroup">Register New Group </div></td></tr>';
+      tag = '<tr><td colspan="3" class="center-align"><div class="chip right green register" id="registerNewGroup">Register New Group </div></td></tr>';
       $("#selectFromList").append(tag);
 
       $("#registerNewGroup").on("click", function(){
@@ -265,7 +266,7 @@ function selectGroupId(callback, maxmembers){
           var members=$("#noofmembers").val();
           var groupName = $("#groupName").val();
           console.log(members, groupName);
-          if (!(groupName != "" && members != "")){
+          if (!(groupName !== "" && members !== "")){
             console.log("Cancelling");
             $("#select-group-id").hide();
             return;
@@ -277,14 +278,14 @@ function selectGroupId(callback, maxmembers){
           var tag = '<div class="col s12 m12 l6 sub-header center-align">Group Name : '+ groupName  +'</div><div class="col s12 m12 l6 sub-header center-align">Members : '+ members +'</div>';
           $("#getUsersData").append(tag);
           var groupUsers={};
-          var tag = '<div class="col s12 l12 m12 center-align"><div class="row fullwidth "><div class="validate center-align input-field col s12 m12 l3"><input disabled  class="validate" id="member-1-email" type="email" ></div><div class="validate center-align input-field col s12 m12 l3"><input disabled  class="validate" id="member-1-name" type="text" ></div><div class="validate center-align input-field col s12 m12 l3"><input disabled  class="validate" id="member-1-rollno" type="text" ></div><div class="validate center-align input-field col s12 m12 l3"><input disabled  class="validate" id="member-1-college" type="text" ></div></div></div>';
+          tag = '<div class="col s12 l12 m12 center-align"><div class="row fullwidth "><div class="validate center-align input-field col s12 m12 l3"><input disabled  class="validate" id="member-1-email" type="email" ></div><div class="validate center-align input-field col s12 m12 l3"><input disabled  class="validate" id="member-1-name" type="text" ></div><div class="validate center-align input-field col s12 m12 l3"><input disabled  class="validate" id="member-1-rollno" type="text" ></div><div class="validate center-align input-field col s12 m12 l3"><input disabled  class="validate" id="member-1-college" type="text" ></div></div></div>';
           $("#getUsersData").append(tag);
           $("#member-1-email").val(userDetails.user.email);
           $("#member-1-name").val(userDetails.user.name);
           $("#member-1-rollno").val(userDetails.user.rollno);
           $("#member-1-college").val(userDetails.user.college);
           for (var i = 2; i <= members ; i++){
-            var tag = '<div class="col s12 l12 m12 center-align"><div class="row fullwidth ">';
+            tag = '<div class="col s12 l12 m12 center-align"><div class="row fullwidth ">';
             tag +='<div class=" center-align input-field col s12 m12 l3"><input  id="member-' + i + '-email" type="email" class="validate" ><label for="member-' + i + '-email">Member ' + i + ' Email </label> </div>';
             tag +='<div class=" center-align input-field col s12 m12 l3"><input  id="member-' + i + '-name" type="text" class="validate" ><label for="member-' + i + '-name">Member ' + i + ' Name </label> </div>';
             tag +='<div class=" center-align input-field col s12 m12 l3"><input  id="member-' + i + '-rollno" type="text" class="validate" ><label for="member-' + i + '-rollno">Member ' + i + ' Roll Number </label> </div>';
@@ -292,7 +293,7 @@ function selectGroupId(callback, maxmembers){
             tag+='</div></div>';
             $("#getUsersData").append(tag);
           }
-          var tag ='<div class="col s12 m12 l12 center-align"><button class="btn waves-effect waves-light green darken-3" type="submit" name="action" id="getUserDataEmailSubmit">Next<i class="material-icons right">send</i></button></div>';
+          tag ='<div class="col s12 m12 l12 center-align"><button class="btn waves-effect waves-light green darken-3" type="submit" name="action" id="getUserDataEmailSubmit">Next<i class="material-icons right">send</i></button></div>';
           $("#getUsersData").append(tag);
 
           $("#getUsersData").show();
@@ -319,7 +320,7 @@ function selectGroupId(callback, maxmembers){
               groupjsondata:groupjsondata,
               groupName:groupName,
               members : members
-            }
+            };
             $.post("registergroup.php",data)
               .done(function(data){
                 var response=JSON.parse(data);
@@ -342,8 +343,8 @@ function selectGroupId(callback, maxmembers){
 function registerEvent(event){
   console.log(event);
   function callback(groupId){
-    if (groupId == 0){
-      console.log("Selection of GroupId failed")
+    if (groupId === 0){
+      console.log("Selection of GroupId failed");
       return;
     }
     var url="eventreg.php?event=" + event + "&groupid=" + groupId;
@@ -436,8 +437,8 @@ function deregisterEvent(eventcode, groupid){
 function registerWorkshop(workshop){
   console.log(workshop);
   function callback(groupId){
-    if (groupId == 0){
-      console.log("Selection of GroupId failed")
+    if (groupId === 0){
+      console.log("Selection of GroupId failed");
       return;
     }
 
@@ -479,7 +480,7 @@ function registerWorkshop(workshop){
               logout();
             }
 
-          })
+          });
 
       });
     });
