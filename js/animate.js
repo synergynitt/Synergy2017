@@ -98,42 +98,44 @@ function changeBackground(i){
 
 
 $("#workshops").on('click',function() {
-    $('html, body').animate({
+  $("#notificationModal").openModal();
+  $('html, body').animate({
         'scrollTop' : $("#synergy-workshops").position().top
-    });
+  });
 });
 $("#goto-workshops").on('click',function() {
-    $('html, body').animate({
-        'scrollTop' : $("#synergy-workshops").position().top
-    });
+  $("#notificationModal").openModal();
+  $('html, body').animate({
+      'scrollTop' : $("#synergy-workshops").position().top
+  });
 });
 $("#events").on('click',function() {
-    $('html, body').animate({
-        'scrollTop' : $("#synergy-events").position().top
-    });
+  $('html, body').animate({
+      'scrollTop' : $("#synergy-events").position().top
+  });
 });
 $("#goto-events").on('click',function() {
-    $('html, body').animate({
-        'scrollTop' : $("#synergy-events").position().top
-    });
+  $('html, body').animate({
+      'scrollTop' : $("#synergy-events").position().top
+  });
 });
 $("#registration").on('click',function() {
-    $('html, body').animate({
-        'scrollTop' : $("#synergy-reg").position().top
-    });
+  $('html, body').animate({
+      'scrollTop' : $("#synergy-reg").position().top
+  });
 });
 $("#goto-registration").on('click',function() {
-    $('html, body').animate({
-        'scrollTop' : $("#synergy-reg").position().top
-    });
+  $('html, body').animate({
+      'scrollTop' : $("#synergy-reg").position().top
+  });
 });
 $("#guestlectures").on('click',function() {
-    $('html, body').animate({
-        'scrollTop' : $("#synergy-gl").position().top
-    });
+  $('html, body').animate({
+      'scrollTop' : $("#synergy-gl").position().top
+  });
 });
 $("#sponsors").on('click',function() {
-    $('html, body').animate({
-        'scrollTop' : $("#synergy-sponsors").position().top
-    });
+  $('html, body').animate({
+      'scrollTop' : $("#synergy-sponsors").position().top
+  });
 });
