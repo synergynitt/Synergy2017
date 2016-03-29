@@ -373,7 +373,10 @@ function registerEvent(event){
       selectGroupId(callback, maxmembers);
     }
   }else{
-      $("#"+event+" .reg-result").html("You need to login to register");
+      $("#"+event+" .reg-result").html("<p class='rules'>You need to <a href='#synergy-reg'>login</a> to register for Accomodation. Close the book to login </p>");
+      $('html, body').animate({
+          'scrollTop' : $("#synergy-reg").position().top
+      });
   }
 }
 
@@ -496,7 +499,10 @@ function registerWorkshop(workshop){
       selectGroupId(callback, maxmembers);
     }
   }else{
-      $("." + workshop + ".reg-result").html("You need to login to register");
+      $("." + workshop + ".reg-result").html("<p class='rules'>You need to <a href='#synergy-reg'>login</a> to register for Accomodation. Close the book to login </p>");
+      $('html, body').animate({
+          'scrollTop' : $("#synergy-reg").position().top
+      });
   }
 
 }
@@ -598,7 +604,10 @@ $("#accomodation").on("click",function(){
   $("#registerAccomodationModal").openModal();
   if (loggedin===0){
     $("#registerAccomodationModal p").empty();
-    $("#registerAccomodationModal p").html("You need to login to register for Accomodation");
+    $("#registerAccomodationModal p").html("<p class='rules'>You need to <a href='#synergy-reg'>login</a> to register for Accomodation. Close the book to login </p>");
+    $('html, body').animate({
+        'scrollTop' : $("#synergy-reg").position().top
+    });
     $("#registerAccomodation").hide();
   }else{
     $("#registerAccomodation").show();

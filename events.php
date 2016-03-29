@@ -60,23 +60,23 @@ $workshopfee = array(
   'aeromodelling' =>  1000
 );
 $workshopslotes = array(
-  'automobile' => array(14,15,16),
-  '3dprinting' => array(15,16),
-  'ornithopter' => array(15,16),
-  'robotics' => array(15, 16),
-  'autocad' => array(15, 16),
-  'creo' => array(15, 16),
-  'solidworks' => array(15, 16),
-  'aeromodelling' =>  array(15, 16)
+  'automobile' => array("April-14","April-15","April-16"),
+  '3dprinting' => array("April-15","April-16"),
+  'ornithopter' => array("April-15","April-16"),
+  'robotics' => array("April-15","April-16"),
+  'autocad' => array("April-15","April-16"),
+  'creo' => array("April-15","April-16"),
+  'solidworks' => array("April-15","April-16"),
+  'aeromodelling' => array("April-15","April-16")
 );
 $workshopslotmaxmembers = array(
-  'automobile' => array('14' => 100, '15' => 100, '16' => 100),
-  '3dprinting' => array('15' => 1000, '16' => 1000),
-  'ornithopter' => array('15' => 1000, '16' => 1000),
-  'robotics' => array('15' => 100, '16' => 100),
-  'autocad' => array('15' => 0, '16' => 100),
-  'creo' => array('15' => 100, '16' => 100),
-  'solidworks' => array('15' => 100, '16' => 100),
-  'aeromodelling' =>  array('15' => 100, '16' => 100)
+  'automobile' => array('April-14' => 100, 'April-15' => 100, 'April-16' => 100),
+  '3dprinting' => array('April-15' => 1000, 'April-16' => 1000),
+  'ornithopter' => array('April-15' => 1000, 'April-16' => 1000),
+  'robotics' => array('April-15' => 100, 'April-16' => 100),
+  'autocad' => array('April-15' => 0, 'April-16' => 100),
+  'creo' => array('April-15' => 100, 'April-16' => 100),
+  'solidworks' => array('April-15' => 100, 'April-16' => 100),
+  'aeromodelling' =>  array('April-15' => 100, 'April-16' => 100)
 );
 ?>
