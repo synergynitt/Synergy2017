@@ -78,6 +78,7 @@ require 'events.php';
                 <th>Group ID</th>
                 <th>Group Name</th>
                 <th>Members</th>
+                <th>Emails</th>
               </tr>
             </thead>
             <tbody>
@@ -91,14 +92,17 @@ require 'events.php';
                 $sqlSelectGroupMembers = "SELECT * FROM `usergroup` WHERE `groupid`=\"$groupid\"";
                 $selectGroupMembersResult = executeQuery($db, $sqlSelectGroupMembers);
                 $groupMembers="";
+                $groupMembersEmails="";
                 if ($selectGroupMembersResult->num_rows>0){
                   while ($groupMember = $selectGroupMembersResult->fetch_assoc()){
                     $userid=$groupMember['userid'];
                     $sqlSelectUser = "SELECT * FROM `users` WHERE  `userid`=\"$userid\"";
                     $selectUserResult = executeQuery($db, $sqlSelectUser);
                     $username = $selectUserResult->fetch_assoc();
-                    $username = $username['name'];
-                    $groupMembers .= $username . ", ";
+                    $name = $username['name'];
+                    $email = $username['email'];
+                    $groupMembers .= $name . ", ";
+                    $groupMembersEmails.= $email . ", ";
                   }
                 }
                 ?>
@@ -106,6 +110,7 @@ require 'events.php';
                   <td><?php echo $groupid ?></td>
                   <td><?php echo ucwords(strtolower($groupName)) ?></td>
                   <td><?php $groupMembers = str_replace('.',' ',trim($groupMembers, ", ")); echo ucwords(strtolower($groupMembers)) ?></td>
+                  <td><?php $groupMembersEmails = trim($groupMembersEmails, ", "); echo strtolower($groupMembersEmails) ?></td>
                 </tr>
                 <?php
               }
@@ -132,6 +137,7 @@ require 'events.php';
                 <th>Group ID</th>
                 <th>Group Name</th>
                 <th>Members</th>
+                <th>Email</th>
                 <th>Slot</th>
               </tr>
             </thead>
@@ -147,14 +153,17 @@ require 'events.php';
                 $sqlSelectGroupMembers = "SELECT * FROM `usergroup` WHERE `groupid`=\"$groupid\"";
                 $selectGroupMembersResult = executeQuery($db, $sqlSelectGroupMembers);
                 $groupMembers="";
+                $groupMembersEmails="";
                 if ($selectGroupMembersResult->num_rows>0){
                   while ($groupMember = $selectGroupMembersResult->fetch_assoc()){
                     $userid=$groupMember['userid'];
                     $sqlSelectUser = "SELECT * FROM `users` WHERE  `userid`=\"$userid\"";
                     $selectUserResult = executeQuery($db, $sqlSelectUser);
                     $username = $selectUserResult->fetch_assoc();
-                    $username = $username['name'];
-                    $groupMembers .= $username . ", ";
+                    $name = $username['name'];
+                    $email = $username['email'];
+                    $groupMembers .= $name . ", ";
+                    $groupMembersEmails .= $email . ", ";
                   }
                 }
                 ?>
@@ -162,6 +171,7 @@ require 'events.php';
                   <td><?php echo $groupid ?></td>
                   <td><?php echo ucwords(strtolower($groupName)) ?></td>
                   <td><?php $groupMembers = str_replace('.',' ',trim($groupMembers, ", ")); echo ucwords(strtolower($groupMembers)) ?></td>
+                  <td><?php $groupMembersEmails = trim($groupMembersEmails, ", "); echo strtolower($groupMembersEmails) ?></td>
                   <td><?php echo $slot ?></td>
                 </tr>
                 <?php
