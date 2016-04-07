@@ -196,3 +196,14 @@ input:-webkit-autofill:active {
 section div {
   /*border: 1px solid #000;*/
 }
+.speaker{
+  height: 300px;
+  width: 200px;
+}
+.card-desciption{
+  font-size: 12px;
+}
+.centreAlignWrapper{
+  position: relative;
+  /*display: inline;*/
+}
