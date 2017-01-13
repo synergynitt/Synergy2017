@@ -53,8 +53,8 @@ $(".fadingbackground").children("div").css({
 });
 (function textanimation() {
     timedText("MECHANICAL DEPARTMENT, NIT TRICHY PRESENTS", "#textanimdata", function(){
-        timedText("SYNERGY 2016".toUpperCase(), "#textanimdata", function(){
-          timedText ("ON APRIL 14,15,16","#textanimdata",textanimation);
+        timedText("SYNERGY 2017".toUpperCase(), "#textanimdata", function(){
+          timedText ("ON MARCH 24, 25, 26","#textanimdata",textanimation);
         });
     });
 }());
@@ -81,7 +81,7 @@ function changeBackground(i){
 (function changingbackground(){
   var i = 0;
   var max = 5;
-  var timelimit = 5000;
+ var timelimit = 5000;
   for (i=0;i<=max;i++){
     if (i === max) {
       setTimeout(changingbackground, (max+1)*timelimit);
@@ -98,13 +98,11 @@ function changeBackground(i){
 
 
 $("#workshops").on('click',function() {
-  $("#notificationModal").openModal();
   $('html, body').animate({
         'scrollTop' : $("#synergy-workshops").position().top
   });
 });
 $("#goto-workshops").on('click',function() {
-  $("#notificationModal").openModal();
   $('html, body').animate({
       'scrollTop' : $("#synergy-workshops").position().top
   });
