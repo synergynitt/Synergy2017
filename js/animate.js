@@ -54,7 +54,7 @@ $(".fadingbackground").children("div").css({
 (function textanimation() {
     timedText("Mechanical Department of NIT Trichy Presents", "#textanimdata", function(){
         timedText("SYNERGY 2017", "#textanimdata", function(){
-          timedText ("On March 24, 25, 26","#textanimdata",textanimation);
+          timedText ("On March 17, 18, 19","#textanimdata",textanimation);
         });
     });
 }());
